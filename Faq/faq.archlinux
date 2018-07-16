@@ -1,0 +1,513 @@
+$ sudo iptables -t mangle -A POSTROUTING -j TTL --ttl-set 65
+----------------------------Установка Archlinux--------------------
+$ user
+# root
+> комментарий
+----------------------------Установка Archlinux--------------------
+> запилить на диск
+$ sudo pacman -S brasero
+
+> или на флешку
+$ sudo pacman -S unetbootin
+
+> или на флешку через dd
+$ sudo umount /dev/sdfX
+$ sudo dd if=/dev/zero of=/dev/sdfX
+$ sudo dd if=/home/user/Загрузки/archlinux-2013.08.01-dual.iso of=/dev/sdf
+
+> грузимся
+# cfdisk
+
+> размечаем
+# mkfs.ext2 /dev/sda1
+# mkfs.ext4 /dev/sda3
+# mkfs.ext4 /dev/sda4
+# mkswap /dev/sda2
+# swapon /dev/sda2
+
+> проверяем
+# cfdisk
+> sda1 Boot Primary ext2     150 МB
+> sda2      Primary swap   10000 МB
+> sda3      Primary ext4   30000 МB
+> sda4      Primary ext4     all МB
+
+> монтируем корень, создаем boot,home
+# mount /dev/sda3 /mnt
+# mkdir /mnt/{boot,home}
+
+> проверяем
+# ls /mnt/
+> boot/ home/ lost+found/
+
+> монтируем boot,home
+# mount /dev/sda1 /mnt/boot
+# mount /dev/sda4 /mnt/home
+
+> ставим base,base-devel,grub-bios
+# pacstrap /mnt base base-devel
+# pacstrap /mnt grub-bios
+# genfstab -p /mnt >> /mnt/etc/fstab
+
+> заходим
+# arch-chroot /mnt /bin/bash
+
+> конфигурация системы:
+# nano /etc/hostname
+myhost
+
+# nano /etc/hosts:
+127.0.0.1   myhost localhost
+::1         myhost localhost
+
+# nano /etc/vconsole.conf
+KEYMAP=ru
+FONT=cyr-sun16
+FONT_MAP=
+
+# nano /etc/timezone
+Europe/Moscow
+
+# ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+# hwclock --systohc --utc
+
+# nano /etc/locale.gen:
+en_US.UTF-8 UTF-8
+ru_RU.UTF-8 UTF-8
+
+# nano /etc/locale.conf:
+LOCALE="ru_RU.UTF-8"
+
+> Или так
+# localectl set-locale LANG="ru_RU.UTF-8"
+
+# locale-gen
+> Generating locales...
+>   en_US.UTF-8... done
+>   ru_RU.UTF-8... done
+> Generation complete.
+
+> Настройте /etc/mkinitcpio.conf
+# mkinitcpio -p linux
+
+> Установка загрузчика GRUB2
+# grub-install /dev/sda
+# grub-mkconfig -o /boot/grub/grub.cfg
+
+# passwd
+# reboot
+
+# root
+# ip addr
+# systemctl start dhcpcd@enp2s0.service
+# systemctl enable dhcpcd@enp2s0.service
+
+> полезные команды
+> setfont UniCyr_8x16
+> cp /boot/grub/locale/en\@quot.mo /boot/grub/locale/en.mo
+
+# nano /etc/pacman.d/mirrorlist
+> ## Score: 1.2, Russian Federation
+> Server = http://mirror.yandex.ru/archlinux/$repo/os/$arch
+> ## Score: 4.0, Russian Federation
+> Server = http://mirror.rol.ru/archlinux/$repo/os/$arch
+
+# useradd -m -g users -G wheel user_name
+# passwd user_name
+# nano /etc/sudoers
+> меняем # %wheel ALL=(ALL) ALL на
+user_name ALL=(ALL) ALL
+
+# exit
+# user_name
+---------------------Иксы------------------------------------------
+$ sudo pacman -S xorg-server xorg-server-utils xorg-xinit xorg-utils
+$ sudo pacman -S nvidia
+
+> или другие
+$ sudo pacman -S xorg
+22-intel
+
+----------------------------Иксы OPTIMUS---------------------------
+$ sudo pacman -S intel-dri xf86-video-intel  xf86-input-mouse xf86-input-synaptics xf86-input-keyboard
+$ sudo pacman -S bumblebee nvidia bbswitch primus mesa-demos
+$ sudo gpasswd -a user bumblebee
+$ sudo systemctl enable bumblebeed.service
+$ sudo gedit /etc/modprobe.d/modprobe.conf
+> blacklist nouveau
+
+$ sudo gedit /etc/bumblebee/bumblebee.conf
+> Driver=nvidia
+> Bridge=auto
+# Bridge=virtualgl
+
+$ sudo gedit /etc/mkinitcpio.conf
+> MODULES="i915 bbswitch"
+
+$ sudo mkinitcpio -p linux
+$ sudo gedit /etc/default/grub
+> GRUB_CMDLINE_LINUX_DEFAULT="rcutree.rcu_idle_gp_delay=1"
+
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg
+$ sudo gedit /etc/bumblebee/xorg.conf.nvidia
+> BusID "PCI:01:00:0"
+
+> полезные команды
+> $ lspci -k
+> $ optirun --status
+> $ optirun nvidia-settings -c :8
+> $ sudo tee /proc/acpi/bbswitch <<<ON
+> $ sudo tee /proc/acpi/bbswitch <<<OFF
+> $ dmesg | tali -1
+> $ lspci -d 10de: -vvnn
+> $ cat /proc/cmdline
+> $ lspci | egrep 'VGA|3D'
+> $ lspci -k | grep VGA -A2
+> $ primusrun /opt/google/chrome/google-chrome --ignore-gpu-blacklist %U
+> $ optirun glxgears
+> $ optirun glxspheres
+
+---------------------------STEAM-----------------------------------
+> Стим запускать без optirun - обычным способом
+http://steamdb.info/linux/
+
+Open Steam => Settings => In-Game => deaktivate Steam-Community in Game
+
+> Dota 2: Properties->General->Set launch options
+$ vblank_mode=0 PRIMUS_SYNC=1 STEAM_RUNTIME=1 optirun -b primus %command% -language russian -novid
+
+> Trine 2: Properties->General->Set launch options
+LD_PRELOAD=”libpthread.so.0 libGL.so.1″ __GL_THREADED_OPTIMIZATIONS=1 optirun %command%
+LD_PRELOAD=”libpthread.so.0 libGL.so.1″ __GL_THREADED_OPTIMIZATIONS=1 primusrun %command%
+
+primusrun steam steam://rungameid/35720
+primusrun steam steam://rungameid/35720 -d3d
+
+primusrun ./hl2_linux -game left4dead2_beta -steam -language russian
+
+vblank_mode=0 primusrun steam steam://rungameid/240 -nod3d9ex
+killall steam
+
+---------------------Иксы для VBox---------------------------------
+$ sudo pacman -S virtualbox-guest-utils
+$ sudo modprobe -a vboxguest vboxsf vboxvideo
+$ sudo nano /etc/modules-load.d/virtualbox.conf
+    vboxguest
+    vboxsf
+    vboxvideo
+$ sudo nano ~/.xinitrc
+    /usr/bin/VBoxClient-all
+
+--------------------Устанавливаем Gnome----------------------------
+> без gnome-extra
+$ sudo pacman -Syu gnome evolution file-roller gedit gnome-color-manager rygel
+
+$ sudo systemctl enable gdm
+$ sudo reboot
+-------------------------------------------------------------------
+$ sudo gedit /etc/pacman.conf
+[archlinuxfr]
+SigLevel = Never
+Server=http://repo.archlinux.fr/$arch
+
+$ sudo pacman -Syu yaourt
+$ sudo pacman-key --init && sudo pacman-key --populate archlinux && sudo pacman-key --refresh-keys
+
+$ yaourt -S google-chrome lib7zip ntfs-3g bogofilter gimp deluge skype vlc ntfsprogs dosfstools libreoffice mc masterpdfeditor
+$ yaourt -S faience-icon-theme gnome-tweak-tool cairo-ubuntu freetype2-ubuntu fontconfig-ubuntu ttf-ms-fonts libgnomekbd
+
+$ yaourt -S numlockx
+
+$ sudo gedit /etc/gdm/Init/Default https://wiki.archlinux.org/index.php/Activating_Numlock_on_Bootup
+> в конец
+if [ -x /usr/bin/numlockx ]; then
+      /usr/bin/numlockx on
+fi
+
+> тема gnome-shell и шрифт для темы
+yaourt -S gnome-shell-theme-xgnome-enhanced sony_sketch_ef_font
+-------------------------------------------------------------------
+> кодеки в случае необходимости
+$ sudo pacman -S `pacman -Ss gstreamer | grep -e'^extra/gstreamer0.10' | awk '{print $1}'`
+> или так
+$ sudo pacman -S gstreamer0.10-{{bad,good,ugly,base}{,-plugins},ffmpeg}
+
+> очистить корзину root
+$ sudo dbus-launch nautilus
+----------папки по умолчанию в директории пользователя------------
+$ sudo pacmanxdg-user-dirs
+$ sudo nano /etc/xdg/user-dirs.defaults
+$ xdg-user-dirs-update 
+-----------------------Удаление всякой ерунды---------------------
+> gnome
+$ sudo pacman -R gnome-doc-utils gnome-common yelp vino sushi epiphany empathy baobab gnome-user-docs totem
+> gnome-extra
+$ sudo pacman -R devhelp accerciser aisleriot anjuta five-or-more four-in-a-row gnome-chess gnome-clocks gnome-documents gnome-devel-docs
+$ sudo pacman -R gnome-getting-started-docs gnome-klotski gnome-mahjongg gnome-mines gnome-nettool gnome-nibbles gnome-photos gnome-sudoku
+$ sudo pacman -R gnome-tetravex gnome-robots iagno gnome-weather seahorse quadrapassel orca lightsoff vinagre tali swell-foop
+> хрень
+$ sudo pacman -R docbook-xml docbook-xsl rarian source-highlight gtk-doc intltool libgda glade
+> удаляем сироты
+$ sudo pacman -Rs $(pacman -Qtdq)
+
+------------------FAST TSC CALIBRATION FAILED----------------------
+$ sudo gedit /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="clocksource=acpi_pm"
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+---------------------------Grub2-----------------------------------
+$ yaourt -Ss grub2-theme
+$ yaourt -S grub2-theme-archlinux
+$ sudo gedit /etc/default/grub
+> меняем
+#GRUB_THEME="/path/to/gfxtheme"
+> на
+GRUB_THEME="/boot/grub/themes/Archlinux/theme.txt"
+> и меняем
+GRUB_CMDLINE_LINUX_DEFAULT="quiet"
+> на
+GRUB_CMDLINE_LINUX_DEFAULT=""
+
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+-------------------------Virtual Box-------------------------------
+$ yaourt -S virtualbox-bin virtualbox-ext-oracle
+$ sudo gpasswd -a user vboxusers
+$ sudo systemctl enable dkms.service 
+# reboot
+
+> для загрузки флешки
+$ sudo fdisk -l
+$ sudo umount /dev/sdb1
+$ sudo chmod 666 /dev/sdb1
+$ VBoxManage internalcommands createrawvmdk -filename ~/.config/VirtualBox/usb.vmdk -rawdisk /dev/sdb1
+
+------------------------------4g модем E3272 и Network manager-----
+http://archlinux.org.ru/forum/topic/13139/
+
+Место хранения подключений - /etc/NetworkManager/system-connections/
+
+файл с названием моего оператора со следующим содержанием:
+
+[connection]
+id=megafon
+uuid=04331ad3-a2aa-4196-875d-6a8fcea3f063
+type=gsm
+autoconnect = true
+
+[gsm]
+number=*99#
+password-flags=4
+apn=internet
+network-type=4
+pin-flags=4
+
+[ipv4]
+method=auto
+
+uuid вы можете сгенерировать(uuidgen) любой, который ещё не используется в вашей системе. Остальное, думаю, понятно, и можно будет изменить с помошью gui но об этом дальше.
+
+После создания и сохранения, необходимо выставить права иначе файл не подхватиться NM.
+chmod 0600 <file> - меняем права, перезагружаем сервис NM
+systemctl restart NetworkManager
+
+------------------------------3g Мегафон---------------------------
+$ sudo pacman -S usb_modeswitch net-tools wireless_tools ppp
+
+$ sudo gedit /etc/ppp/options-mobile
+/dev/ttyUSB0
+921600
+defaultroute
+usepeerdns
+crtscts
+lock
+noauth
+local
+persist
+modem
+nopcomp
+novjccomp
+nobsdcomp
+nodeflate
+noaccomp
+ipcp-accept-local
+ipcp-accept-remote
+noipdefault
+
+$ sudo mkdir /etc/ppp/chatscripts
+$ sudo gedit /etc/ppp/chatscripts/megafon.chat
+ABORT 'BUSY'
+ABORT 'NO CARRIER'
+ABORT 'VOICE'
+ABORT 'NO DIALTONE'
+ABORT 'NO DIAL TONE'
+ABORT 'NO ANSWER'
+ABORT 'DELAYED'
+REPORT CONNECT
+TIMEOUT 6
+'' 'ATQ0'
+'OK-AT-OK' 'ATZ'
+TIMEOUT 3
+'OK-AT-OK' 'ATI'
+'OK' 'ATZ'
+'OK' 'ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0'
+'OK' 'AT\^SYSCFG=2,2,3fffffff,0,1'
+'OK-AT-OK' 'AT+CGDCONT=1,"IP","Internet"'
+'OK' 'ATDT*99#'
+TIMEOUT 30
+CONNECT
+
+$ sudo gedit /etc/ppp/peers/provider
+file /etc/ppp/options-mobile
+connect "/usr/sbin/chat -v -t15 -f /etc/ppp/chatscripts/megafon.chat"
+
+$ sudo systemctl enable ppp@provider.service
+
+------------------------------GoldenDict---------------------------
+> переводчик
+$ yaourt -S goldendict-git
+
+> Набор словарей для GoldenDict http://rutracker.org/forum/viewtopic.php?t=3598709
+
+----------------------------IDE Open-source------------------------
+> git Gui
+$ yaourt -S tk
+$ yaourt -S gitg
+$ yaourt -S smartgithg
+
+> проект Sublime Text-2 http://habrahabr.ru/post/147856/
+$ yaourt -S sublime-text
+
+> проект Brackets http://habrahabr.ru/post/146563/
+$ yaourt -S brackets-git
+
+> проект Light Table http://habrahabr.ru/post/142906/
+$ yaourt -S lighttable
+
+> Java
+$ yaourt -S jre7-openjdk
+$ yaourt -S jdk
+
+> крутая IDE -WebStorm eap
+$ yaourt -S webstorm-eap
+
+> крутая IDE -IntelliJ IDEA UE 13 eap
+$ yaourt -S intellij_idea_ue_13_eap jdk
+
+> ручная установка и настройка IntelliJ IDEA
+> качаем http://confluence.jetbrains.com/display/IDEADEV/IDEA+13+EAP
+> и распаковываем сюда /home/user/idea-IU-130.962
+
+$ gedit /home/user/.local/share/applications/intellijidea.desktop
+[Desktop Entry]
+Name=IntelliJ IDEA 13 Ultimate Edition (EAP)
+Comment=A Java IDE
+Exec=/home/user/idea-IU-130.962/bin/idea.sh
+Icon=/home/user/idea-IU-130.962/bin/idea.png
+Terminal=false
+Type=Application
+Categories=Development;IDE;
+
+# gedit /etc/sudoers
+user linux=NOPASSWD:/home/user/idea-IU-130.962/bin/idea.sh
+
+$ yaourt -R google-webdesigner
+
+--------------------------CUPS-------------------------------------
+$ yaourt -S cups sane hplip hplip-plugin
+
+$ lsusb
+
+$ sudo gedit /etc/udev/rules.d/53-sane.rules
+SUBSYSTEM=="usb", ATTR{idVendor}=="03f0", ATTR{idProduct}=="4e17", MODE="0666", GROUP="scanner"
+
+$ sudo gedit /etc/udev/rules.d/10-usbprinter.rules
+ATTR{idVendor}=="03f0", ATTR{idProduct}=="4e17", MODE:="0666", GROUP:="lp"
+
+$ sudo gedit /etc/sane.d/dll.conf
+hpaio
+
+$ sudo gedit /etc/modprobe.d/modprobe.conf
+blacklist usblp
+
+$ sudo gedit /etc/sane.d/hpaio.conf
+usb 0x03f0 0x4e17
+
+$ sudo systemctl enable cups
+$ sudo reboot
+
+> попробовать без этих пакетов
+> потом доставлять через hp-doctor
+$ hp-doctor
+$ yaourt -S dbus-python python-imaging rpcbind python2-qt pygobject python qt pyqt3 python2-pyqt
+
+> полезные команды
+$ sudo hp-setup -i
+$ sudo ln -s /usr/bin/python2.7 /usr/local/bin/python
+
+> How to disable smart install feature in HP printer(s) from linux
+> http://hplipopensource.com/node/367
+Download http://hplipopensource.com/hplip-web/smartinstall/SmartInstallDisable-Tool.run
+Download http://hplipopensource.com/hplip-web/smartinstall/SmartInstallDisable-Tool.run.asc
+
+$ su -c "gpg --keyserver pgp.mit.edu --recv-keys 0xA59047B9"
+$ cd ~/Загрузки
+$ su -c "gpg --verify SmartInstallDisable-Tool.run.asc SmartInstallDisable-Tool.run"
+$ sh SmartInstallDisable-Tool.run
+
+------------------------Настраиваем WiFi---------------------------
+> если не были установлены
+$ sudo pacman -S usb_modeswitch net-tools wireless_tools
+
+$ ip addr
+> $ sudo ifconfig wlp5s0 up
+> $ sudo iwlist wlp5s0 scanning
+$ sudo mv /etc/wpa_supplicant.conf /etc/wpa_supplicant.conf.original
+
+$ sudo su
+# wpa_passphrase free 22w33e44r > /etc/wpa_supplicant.conf
+# exit
+
+$ sudo gedit /etc/wpa_supplicant.conf
+ctrl_interface=DIR=/run/wpa_supplicant GROUP=wheel
+update_config=1
+ap_scan=1
+network={
+        ssid="free"
+        #psk="22w33e44r"
+        psk=f3c4c71562accfbed9301bc8c744f513fa37430c6df8cdce3675ef0ccbc8ebe9
+}
+
+$ sudo ip link set wlp5s0 up
+$ sudo wpa_supplicant -B -Dwext -i wlp5s0 -c /etc/wpa_supplicant.conf
+$ sudo dhcpcd -A wlp5s0
+
+> $ sudo systemctl enable dhcpcd
+> $ sudo systemctl enable wpa_supplicant@wlp5s0.service
+> Finally, to handle possible ethernet connections, install ifplugd and enable it on your ethernet interface.
+> $ sudo systemctl enable ifplugd@enp5s2
+---------------------------------
+SIOCSIFFLAGS: Operation not possible due to RF-kill
+
+$ sudo yaourt -S rfkill
+$ sudo rfkill list
+$ sudo rfkill unblock all
+-------------------------NetworkManager----------------------------
+$ sudo gpasswd -a user network
+$ sudo systemctl stop dhcpcd.service
+$ sudo systemctl start NetworkManager
+$ sudo systemctl enable NetworkManager
+$ sudo systemctl disable dhcpcd.service
+$ sudo systemctl enable NetworkManager-wait-online.service
+-------------------------------------------------------------------
+$ yaourt -S inxi
+$ inxi -v4 -c6 OR inxi -bDc 6
+$ sudo du --si --max-depth=1
+-------------------------------------------------------------------
+$ sudo mount -o loop ~/Общедоступные/distr/SUF10_v.8.0.0.0.iso ~/Музыка
+$ sudo umount ~/Музыка
+-------------------------------------------------------------------
+sftp://archie@5.34.183.62:2525/home/archie
+ftp://pfr5435082-exp@ftp.pswebshop.com/
+davs://ya.rus.36%40yandex.ru@webdav.yandex.ru/
+

@@ -1,0 +1,38 @@
+#!/bin/bash
+#rm *.png
+#-------------------------------
+convert -background none -fill '#363838' -font BebasNeueBold -pointsize 90 label:'БЕРЛИН' shadow1.png
+convert -background none -fill '#363838' -font AA-BebasNeue -pointsize 45 label:'2400 x 2300 x 600' shadow2.png
+convert -background none -fill '#363838' -font HelveticaNeueCyr-Light -pointsize 22 label:'Цвет: Венге, Дуб' shadow3.png
+convert -background none -gravity West shadow*.* -append 001.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:1 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:5 -crop 65x130+0+0 label2.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 90 label:700 -crop 165x190+0+0 label4.png
+convert -background none -gravity South label*.* +append 002.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#363838' -font BebasNeueBold -pointsize 90 label:'БЕРЛИН' shadow1.png
+convert -background none -fill '#363838' -font AA-BebasNeue -pointsize 45 label:'1760 x 2300 x 600' shadow2.png
+convert -background none -fill '#363838' -font HelveticaNeueCyr-Light -pointsize 22 label:'Цвет: Венге, Дуб' shadow3.png
+convert -background none -gravity West shadow*.* -append 003.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:1 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:2 -crop 65x130+0+0 label2.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 90 label:600 -crop 165x190+0+0 label4.png
+convert -background none -gravity South label*.* +append 004.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#363838' -font BebasNeueBold -pointsize 90 label:'Шкаф-купе комби' shadow1.png
+convert -background none -fill '#363838' -font AA-BebasNeue -pointsize 45 label:'1600 x 2270 x 600' shadow2.png
+convert -background none -gravity West shadow*.* -append 005.png
+rm shadow*.*
+convert -background none -fill white -font My-Font-Regular -pointsize 112 label:1 -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage -crop 65x110+4+0 label1.png
+convert -background none -fill white -font My-Font-Regular -pointsize 112 label:0 -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage -crop 70x110+4+0 label2.png
+convert -background none -fill white -font My-Font-Regular -pointsize 80 label:. -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage -crop 20x0+7+0 label3.png
+convert -background none -fill white -font My-Font-Regular -pointsize 90 label:500 -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage -crop 165x95+7+0 label4.png
+convert -background none -gravity South label*.* +append 006.png
+rm label*.*
+#-------------------------------

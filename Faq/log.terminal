@@ -1,0 +1,18 @@
+sudo systemctl start mysqld
+sudo systemctl start nginx
+sudo systemctl start php-fpm
+sudo gedit /etc/hosts
+chmod 755 ~/
+chmod 755 ~/www
+chmod 755 ~/www/xn----7sbadcxbt6agi8a1c6b5ewb.xn--p1ai
+find ~/www/xn----7sbadcxbt6agi8a1c6b5ewb.xn--p1ai -type f -print0 | xargs -0 chmod 664
+find ~/www/xn----7sbadcxbt6agi8a1c6b5ewb.xn--p1ai -type d -print0 | xargs -0 chmod 775
+sudo chown -R archie:http ~/www/xn----7sbadcxbt6agi8a1c6b5ewb.xn--p1ai
+sudo gedit /etc/nginx/sites-available/xn----7sbadcxbt6agi8a1c6b5ewb.conf
+sudo ln -sr /etc/nginx/sites-available/xn----7sbadcxbt6agi8a1c6b5ewb.conf /etc/nginx/sites-enabled/
+sudo systemctl restart nginx
+mysql -u root -p dbname < fmbase.sql
+sudo systemctl restart mysqld
+sudo systemctl restart php-fpm
+sudo systemctl restart nginx
+

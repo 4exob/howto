@@ -1,0 +1,49 @@
+$ exiftool -s 1.jpg | grep 2017
+
+FileModifyDate                  : 2017:03:05 11:14:49+03:00
+FileAccessDate                  : 2017:03:05 11:21:43+03:00
+FileInodeChangeDate             : 2017:03:05 11:14:49+03:00
+
+$ exiftool "-FileModifyDate-=12:07:00" 1.jpg или 08/
+
+    1 image files updated
+
+$ exiftool -s 1.jpg | grep 2017
+
+FileModifyDate                  : 2017:03:04 23:07:49+03:00
+FileAccessDate                  : 2017:03:05 13:17:51+03:00
+FileInodeChangeDate             : 2017:03:05 13:17:51+03:00
+
+--------------------------------------------------------------------------------------------------
+
+$ find . -iregex '.*.jpg' -exec exiftool -FileModifyDate-=12:07:00 {} {} \;
+
+$ find . -name '*.jpg' | xargs exiftool "-FileModifyDate-=12:07:00"
+
+$ find -name "*.jpg" -exec exiftool "-FileModifyDate-=12:07:00" {} {} \;
+
+--------------------------------------------------------------------------------------------------
+
+FileModifyDate изменения
+
+FileAccessDate открытия
+
+FileInodeChangeDate создание
+
+--------------------------------------------------------------------------------------------------
+
+$ find . -iregex '.*.jpg' -exec exiftool -FileModifyDate-=12:07:00 {} {} \;
+
+$ find . -iregex '.*.jpg' -exec exiftool -FileAccessDate-=12:07:00 {} {} \;
+
+$ find . -iregex '.*.jpg' -exec exiftool -FileInodeChangeDate-=12:07:00 {} {} \;
+
+
+
+$ find -name "*.jpg" -exec exiftool "-FileModifyDate-=12:07:00" {} {} \;
+
+
+$ find -name "*.jpg" -exec exiftool "-FileAccessDate-=12:07:00" {} {} \;
+
+
+$ find -name "*.jpg" -exec exiftool "-FileInodeChangeDate-=12:07:00" {} {} \;

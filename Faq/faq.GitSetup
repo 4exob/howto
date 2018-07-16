@@ -1,0 +1,943 @@
+$ git init
+$ git add .
+$ git commit -m "first commit"
+$ git remote set-url origin https://github.com/4exob/howto.git
+$ git remote add origin https://github.com/4exob/howto.git
+$ git push -u origin master
+$ git st
+$ git hist
+* 9f674de 2015-06-04 | first commit (HEAD -> master, origin/master)...
+
+----------------------------------------------------------------------------------------------------------------------
+$ cd ~/Projects
+$ git clone https://github.com/4exob/howto.git howto
+
+$ git clone git://github.com/4exob/howto.git howto
+
+$ cd ~/Projects/howto
+$ git remote add origin https://github.com/4exob/howto.git
+$ git push -u origin master
+
+> Или чистый репозиторий, с именем shared, разницы нет никакой
+
+$ cd ~/Projects/howto.git
+$ git remote add shared https://github.com/4exob/howto.git
+$ git push shared master
+
+----------------------------------------------------------------------------------------------------------------------
+> Разделяя индексацию и коммит, вы имеете возможность с легкостью
+настроить, что идет в какой коммит.
+$ git add a.html
+$ git add b.html
+$ git commit -m "Changes for a and b"
+>
+$ git add c.html
+$ git commit -m "Unrelated change to c"
+----------------------------------------------------------------------------------------------------------------------
+> Первоначальная настройка Git
+$ git config --global user.name "Alexandr Portnykh"
+$ git config --global user.email rus.36@mail.ru
+$ git config --global core.editor /opt/sublime-text/sublime_text
+$ yaourt -S meld
+$ git config --global merge.tool meld
+
+$ git config --list
+
+> АЛИАСЫ и шорткаты для команд git
+$ gedit ~/.gitconfig
+[user]
+     name = ...
+     email = ...
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+
+> логи
+$ git log
+$ git log --pretty=oneline
+$ git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short
+$ git log --pretty=oneline --max-count=2
+$ git log --pretty=oneline --since='5 minutes ago'
+$ git log --pretty=oneline --until='5 minutes ago'
+$ git log --pretty=oneline --author=<your name>
+$ git log --pretty=oneline --all
+$ git log --all --pretty=format:"%h %cd %s (%an)" --since='7 days ago'
+---------------------------------------------------------------------------------------------------------------------
+> ОТМЕНА ЛОКАЛЬНЫХ ИЗМЕНЕНИЙ (ДО ИНДЕКСАЦИИ)
+> Возвращать рабочий каталог к любому предыдущему состоянию
+> переход в любое состояние
+$ git checkout dd657d1
+
+> переход к последней версии
+$ git checkout master
+> «master» — имя ветки по умолчанию. Переключая имена веток, вы
+> попадаете на последнюю версию выбранной ветки.
+
+> тег первой версии, теперь текущая версия страницы называется v1
+$ git tag v1
+
+> перейти к родителю v1
+$ git checkout v1^
+
+> тэг родителя будет v1-beta
+$ git tag v1-beta
+
+> попереключаться между двумя отмеченными версиями
+$ git checkout v1
+$ git checkout v1-beta
+
+> просмотр тегов
+$ git tag
+> v1
+> v1-beta
+
+> просмотр Тегов в логах
+$ git hist master --all
+> HEAD показывает коммит, на который вы переключились
+---------------------------------------------------------------------------------------------------------------------
+> ОТМЕНА ПРОИНДЕКСИРОВАННЫХ ИЗМЕНЕНИЙ (ПЕРЕД КОММИТОМ)
+> Отменять изменения, которые были проиндексированы
+> Внесите изменение в файл howto.html
+
+$ git add howto.html
+$ git status
+> # On branch master
+> # Changes to be committed:
+> #   (use "git reset HEAD <file>..." to unstage)
+> #
+> #	modified:   howto.html
+
+> Выполните сброс буферной зоны, вывод состояние показывает нам именно
+> то, что мы должны сделать для отмены индексации изменения
+
+$ git reset HEAD howto.html
+> Unstaged changes after reset:
+> M	howto.html
+
+> reset (по умолчанию) не изменяет рабочий каталог, поэтому он все еще
+> содержит нежелательный комментарий
+> использовать команду checkout, чтобы удалить нежелательные изменения в
+> рабочем каталоге
+
+$ git checkout howto.html
+$ git status
+> # On branch master
+> nothing to commit (working directory clean)
+> Наш рабочий каталог опять чист
+----------------------------------------------------------------------------------------------------------------------
+> ОТМЕНА КОММИТОВ
+> коммит, который удаляет изменения, сохраненные нежелательным коммитом
+> т.е. в т.ч. и удаляются изменения в файле
+
+$ git revert HEAD --no-edit
+> однако, и оригинальный и «отмененный» коммиты видны в истории ветки
+
+$ git hist
+> * 3608708 2013-10-07 | Revert "Oops, we didn't.."(HEAD,tag:oops,maste
+> * 7185457 2013-10-07 | Oops, we didn't want this commit [Alexandr
+...
+> * 4e62abb 2013-10-06 | First Commit [Alexandr Portnykh]
+
+> УДАЛЕНИЕ КОММИТТОВ ИЗ ВЕТКИ
+> Удалять самые последние коммиты из ветки
+> Давайте удалим два последних коммита в этой ветке сброса.
+> отметим последний коммит тегом, чтобы потом можно было его найти
+$ git tag oops
+> * 3608708 2013-10-07 | Revert "Oops, we didn't.."(HEAD,tag:oops,maste
+> * 7185457 2013-10-07 | Oops, we didn't want this commit [Alexandr
+> * 92fe67b 2013-10-06 | Added HTML header (tag: v1) [Alexandr Portnykh]
+> * 7eb2b4a 2013-10-06 | Added standard HTML page tags (tag: v1-beta)
+> * 66b3b0e 2013-10-06 | Added h1 tag [Alexandr Portnykh]
+> * 4e62abb 2013-10-06 | First Commit [Alexandr Portnykh]
+
+> Сброс коммитов к предшествующим коммиту с тэгом v1, если он не имеет
+> тега, мы можем использовать хэш-значение
+$ git reset --hard v1
+> * 92fe67b 2013-10-06 | Added HTML header (HEAD, tag: v1, master)
+> * 7eb2b4a 2013-10-06 | Added standard HTML page tags (tag: v1-beta)
+> * 66b3b0e 2013-10-06 | Added h1 tag [Alexandr Portnykh]
+> * 4e62abb 2013-10-06 | First Commit [Alexandr Portnykh]
+
+> Команда reset…
+> 1. Перепишет текущую ветку, чтобы она указывала на нужный коммит
+> 2. Опционально сбросит буферную зону для соответствия с указанным
+> коммитом
+> 3. Опционально сбросит рабочий каталог для соответствия с указанным
+> коммитом
+
+> Ничего никогда не теряется
+$ git hist --all
+> * 3608708 2013-10-07 | Revert "Oops, we didn't ..." (tag:oops)
+> * 7185457 2013-10-07 | Oops, we didn't want this commit [Alexandr
+> * 92fe67b 2013-10-06 | Added HTML header (HEAD, tag: v1, master)
+> * 7eb2b4a 2013-10-06 | Added standard HTML page tags (tag: v1-beta)
+> * 66b3b0e 2013-10-06 | Added h1 tag [Alexandr Portnykh]
+> * 4e62abb 2013-10-06 | First Commit [Alexandr Portnykh]
+
+> Опасность сброса
+> Сброс в локальных ветках, как правило, безопасен
+> Если ветка «расшарена» на удаленных репозиториях, сброс может сбить с
+> толку других пользователей ветки
+
+> Удаление тега oops стало возможным после того как произошел сброс с
+> помощью reset
+> Тег oops свою функцию выполнил. Давайте удалим его и коммиты, на
+> которые он ссылался, сборщиком мусора
+
+> УДАЛЕНИЕ ТЕГА OOPS
+
+$ git tag -d oops
+$ git hist --all
+> * 92fe67b 2013-10-06 | Added HTML header (HEAD, tag: v1, master)
+> * 7eb2b4a 2013-10-06 | Added standard HTML page tags (tag: v1-beta)
+> * 66b3b0e 2013-10-06 | Added h1 tag [Alexandr Portnykh]
+> * 4e62abb 2013-10-06 | First Commit [Alexandr Portnykh]
+> Тег «oops» больше не будет отображаться в репозитории
+----------------------------------------------------------------------------------------------------------------------
+> ВНЕСЕНИЕ ИЗМЕНЕНИЙ В КОММИТЫ
+> Изменять существующие коммиты
+> Вносим изминение в наш файл
+
+$ git add howto.html
+$ git commit -m "Add an author comment"
+
+> Ой... еще изминения
+$ git add howto.html
+$ git commit --amend -m "Add an author/email comment"
+$ git hist --all
+> * c61c285 2013-10-07 | Add an author/email comment (HEAD, master)
+> * 92fe67b 2013-10-06 | Added HTML header (tag: v1) [Alexandr Portnykh]
+> * 7eb2b4a 2013-10-06 | Added standard HTML page tags (tag: v1-beta)
+> * 66b3b0e 2013-10-06 | Added h1 tag [Alexandr Portnykh]
+> * 4e62abb 2013-10-06 | First Commit [Alexandr Portnykh]
+----------------------------------------------------------------------------------------------------------------------
+> ПЕРЕМЕЩЕНИЕ ФАЙЛОВ
+> Перемещать файл в пределах репозитория
+> Перенесем страницу в каталог lib
+
+$ mkdir lib
+$ git mv howto.html lib
+$ git st
+> # On branch master
+> # Changes to be committed:
+> #   (use "git reset HEAD <file>..." to unstage)
+> #
+> #	renamed:    howto.html -> lib/howto.html
+$ git commit -m "Moved howto.html to lib"
+
+> Перемещая файлы с помощью git, мы информируем git о 2 вещах
+> Что файл howto.html был удален.
+> Что файл lib/howto.html был создан.
+> Оба эти факта сразу же проиндексированы и готовы к коммиту. Команда
+> git status сообщает, что файл был перемещен
+---------------------------------------------------------------------------------------------------------------------
+> Исследовать структуру базы данных объектов
+> Поиск последнего коммита
+
+$ git hist --max-count=1
+> * b13aeb9 2013-10-07 | Added index.html. (HEAD, master) [Alexandr
+
+$ git cat-file -t b13aeb9
+>commit
+
+> Вывод последнего коммита
+$ git cat-file -p b13aeb9
+> tree 6f67fea1141b7469f20023b79d5b745c86cf10b1
+> parent c13ab708c276763d3cd9dd86a45d1d769eccb7ca
+> author Alexandr Portnykh <rus.36@mail.ru> 1381100602 +0400
+> committer Alexandr Portnykh <rus.36@mail.ru> 1381100602 +0400
+>
+> Added index.html.
+
+> Вывести дерево каталогов
+$ git cat-file -p 6f67fea
+> 100644 blob ca556ce91b11e2043bc603f87daa450d050926f8	.gitignore
+> 100644 blob 312e90929330e16bc3f4a16483e446dafc9c507b	index.html
+> 040000 tree 5ca700f946e8223537554d4c726788345d0a95b5	lib
+
+> Вывод каталога lib
+$ git cat-file -p 5ca700f
+> 100644 blob 714b989d87614062935b2d25de649e17d13289ea	howto.html
+
+> Вывод файла howto.html
+$ git cat-file -p 714b989
+> <!-- Author: Alexandr Portnykh (rus.36@mail.ru) -->
+> <html>
+>   <head>
+>   </head>
+>   <body>
+>     <h1>howto, World!</h1>
+>   </body>
+> </html>
+----------------------------------------------------------------------------------------------------------------------
+> СОЗДАНИЕ ВЕТКИ
+> Создавать локальную ветку в репозитории
+> назовем нашу новую ветку «style»
+
+$ git checkout -b style
+> git checkout -b <имя ветки> является шорткатом (сокращением) для
+> git branch <имяветки> за которым идет git checkout <имяветки>
+
+> команда git status сообщает о том, что вы находитесь в ветке «style»
+$ git st
+> # On branch style
+> nothing to commit, working directory clean
+$ git hist
+> * b13aeb9 2013-10-07 | Added index.html. (HEAD, style, master)
+> ...
+> * 4e62abb 2013-10-06 | First Commit [Alexandr Portnykh]
+
+$ touch lib/style.css
+> h1 {color: red;}
+
+$ git add lib/style.css
+$ git commit -m "Added css stylesheet"
+
+> Обновите файл howto.html
+> <head>
+>   <link type="text/css" rel="stylesheet" media="all"...
+$ git add lib/howto.html
+$ git commit -m "howto uses style.css"
+
+> Обновите файл index.html
+> <head>
+>   <link type="text/css" rel="stylesheet" media="all"...
+$ git add index.html
+$ git commit -m "Updated index.html"
+
+> Теперь у нас есть новая ветка под названием style с 3 новыми коммитами
+----------------------------------------------------------------------------------------------------------------------
+> НАВИГАЦИЯ ПО ВЕТКАМ
+> Перемещаться между ветками репозитория
+
+$ git hist --all
+> * 7eff9a2 2013-10-07 | Updated index.html (HEAD, style) [Alexandr
+> ...
+> * b13aeb9 2013-10-07 | Added index.html. (master) [Alexandr Portnykh]
+> ...
+> * 4e62abb 2013-10-06 | First Commit [Alexandr Portnykh]
+
+> Переключение на ветку Master
+$ git checkout master
+> Switched to branch 'master'
+
+$ git hist --all
+> * 7eff9a2 2013-10-07 | Updated index.html (style) [Alexandr Portnykh]
+> ...
+> * b13aeb9 2013-10-07 | Added index.html. (HEAD, master) [Alexandr
+> ...
+> * 4e62abb 2013-10-06 | First Commit [Alexandr Portnykh]
+
+$ cat lib/howto.html
+> <!-- Author: Alexandr Portnykh (rus.36@mail.ru) -->
+> <html>
+>   <head>
+>   </head>
+>   <body>
+>     <h1>howto, World!</h1>
+>   </body>
+
+> Сейчас мы находимся на ветке Master.
+> Это заметно потому что файл howto.html не использует стили style.css
+
+$ git checkout style
+> Switched to branch 'style'
+
+$ cat lib/howto.html
+> <!-- Author: Alexandr Portnykh (rus.36@mail.ru) -->
+> <html>
+>   <head>
+>   	<link type="text/css" rel="stylesheet" media="all"...
+>   </head>
+>   <body>
+>     <h1>howto, World!</h1>
+>   </body>
+
+> Содержимое lib/howto.html подтверждает, что мы вернулись в ветку style
+----------------------------------------------------------------------------------------------------------------------
+> ИЗМЕНЕНИЯ В ВЕТКЕ MASTER
+> Работать с несколькими ветками с различными (и, возможно,
+> конфликтующими) изменениями
+> Пока вы меняли ветку «style», кто-то решил обновить ветку master. Они
+> добавили README.md
+
+$ git checkout master
+$ touch README.md
+> This is the howto World example from the git tutorial.
+
+$ git add README.md
+$ git commit -m "Added README"
+$ git hist --all
+> * 68a68e8 2013-10-07 | Added README (HEAD, master) [Alexandr Portnykh]
+> | * 7eff9a2 2013-10-07 | Updated index.html (style) [Alexandr
+> | * 393828d 2013-10-07 | howto uses style.css [Alexandr Portnykh]
+> | * 8b033f0 2013-10-07 | Added css stylesheet [Alexandr Portnykh]
+> |/  
+> * b13aeb9 2013-10-07 | Added index.html. [Alexandr Portnykh]
+> * c13ab70 2013-10-07 | Moved howto.html to lib [Alexandr Portnykh]
+> * c61c285 2013-10-07 | Add an author/email comment [Alexandr Portnykh]
+> * 92fe67b 2013-10-06 | Added HTML header (tag: v1) [Alexandr Portnykh]
+> * 7eb2b4a 2013-10-06 | Added standard HTML page tags (tag: v1-beta)
+> * 66b3b0e 2013-10-06 | Added h1 tag [Alexandr Portnykh]
+> * 4e62abb 2013-10-06 | First Commit [Alexandr Portnykh]
+----------------------------------------------------------------------------------------------------------------------
+> СЛИЯНИЕ
+> Сливать две отличающиеся ветки для переноса изменений обратно в одну ветку
+
+$ git checkout style
+> Switched to branch 'style'
+$ git merge master
+> Merge made by the 'recursive' strategy.
+>  README.md | 1 +
+>  1 file changed, 1 insertion(+)
+>  create mode 100644 README.md
+> ветка master сливается в style
+$ git hist --all
+> * d47dc09 2013-10-07 | Merge branch 'master' into style (HEAD, style)
+> |\  
+> | * 68a68e8 2013-10-07 | Added README (master) [Alexandr Portnykh]
+> * | 7eff9a2 2013-10-07 | Updated index.html [Alexandr Portnykh]
+> * | 393828d 2013-10-07 | howto uses style.css [Alexandr Portnykh]
+> ...
+
+> Путем периодического слияния ветки master с веткой style можно
+> переносить в master любые
+> изменения и поддерживать совместимость изменений style с изменениями в
+> основной ветке
+> Метод перебазирования является альтернативой методу слияния
+----------------------------------------------------------------------------------------------------------------------
+> СОЗДАНИЕ КОНФЛИКТА
+> Создание конфликтующих изменений в ветке master
+> Вернитесь в ветку master
+
+$ git checkout master
+
+> вносим изминения в ФАЙЛ: lib/howto.html
+$ git add lib/howto.html
+$ git commit -m "Life is great"
+$ git hist --all
+> * 1373061 2013-10-07 | Life is great (HEAD, master) [Alexandr
+> | *   d47dc09 2013-10-07 | Merge branch 'master' into style (style)
+> | |\  
+> | |/  
+> |/|   
+> * | 68a68e8 2013-10-07 | Added README [Alexandr Portnykh]
+> | * 7eff9a2 2013-10-07 | Updated index.html [Alexandr Portnykh]
+> | * 393828d 2013-10-07 | howto uses style.css [Alexandr Portnykh]
+> ...
+
+> После коммита «Added README» ветка master была объединена с веткой
+> style, но 
+> в настоящее время в master есть дополнительный коммит, который не был
+> слит с style
+----------------------------------------------------------------------------------------------------------------------
+> РАЗРЕШЕНИЕ КОНФЛИКТОВ
+> Разрешать конфликты во время слияния
+> Вернемся к ветке style и попытаемся объединить ее с новой веткой
+> master
+
+$ git checkout style
+> Switched to branch 'style'
+$ git merge master
+> Auto-merging lib/howto.html
+> CONFLICT (content): Merge conflict in lib/howto.html
+> Automatic merge failed; fix conflicts and then commit the result.
+
+> Решение конфликта: необходимо вручную внести изменения в
+> lib/howto.html
+
+$ git add lib/howto.html
+$ git commit -m "Merged master fixed conflict."
+$ git hist --all
+> *   e662002 2013-10-07 | Merged master fixed conflict. (HEAD, style)
+> |\  
+> | * 1373061 2013-10-07 | Life is great (master) [Alexandr Portnykh]
+> * |   d47dc09 2013-10-07 | Merge branch 'master' into style [Alexandr
+> |\ \  
+> | |/  
+> | * 68a68e8 2013-10-07 | Added README [Alexandr Portnykh]
+> * | 7eff9a2 2013-10-07 | Updated index.html [Alexandr Portnykh]
+> * | 393828d 2013-10-07 | howto uses style.css [Alexandr Portnykh]
+> ...
+----------------------------------------------------------------------------------------------------------------------
+> ПЕРЕБАЗИРОВАНИЕ КАК АЛЬТЕРНАТИВА СЛИЯНИЮ
+> Различия между перебазированием и слиянием
+
+> Сброс ветки style
+> вернуться в ветке style в точку перед слиянием с master, необходимо
+> найти последний коммит перед слиянием
+
+$ git checkout style
+> Switched to branch 'style'
+$ git hist --all
+> *   263939d 2013-10-13 | Merged master fixed conflict. (HEAD, style) [Alexandr Portnykh]
+> |\  
+> | * 3a42645 2013-10-13 | Life is great (master) [Alexandr Portnykh]
+> * |   fadfb31 2013-10-13 | Merge branch 'master' into style [Alexandr Portnykh]
+> |\ \  
+> | |/  
+> | * e381443 2013-10-13 | Added README [Alexandr Portnykh]
+> * | c9d0ded 2013-10-13 | Updated index.html [Alexandr Portnykh]
+> * | b997ad5 2013-10-13 | howto uses style.css [Alexandr Portnykh]
+> * | a1718e3 2013-10-13 | Added css stylesheet [Alexandr Portnykh]
+> |/  
+> * b23e57a 2013-10-13 | Added index.html. [Alexandr Portnykh]
+> * 366f1ed 2013-10-13 | Moved howto.html to lib [Alexandr Portnykh]
+> * 01abb92 2013-10-13 | Add an author/email comment [Alexandr Portnykh]
+> * 7b4c671 2013-10-13 | Added HTML header [Alexandr Portnykh]
+> * 5454d42 2013-10-13 | Added standard HTML page tags [Alexandr Portnykh]
+> * bbb6c6f 2013-10-13 | Added h1 tag [Alexandr Portnykh]
+> * 1820923 2013-10-13 | First Commit [Alexandr Portnykh]
+$ git reset --hard c9d0ded
+> HEAD is now at c9d0ded Updated index.html
+$ git hist --all
+> * 3a42645 2013-10-13 | Life is great (master) [Alexandr Portnykh]
+> * e381443 2013-10-13 | Added README [Alexandr Portnykh]
+> | * c9d0ded 2013-10-13 | Updated index.html (HEAD, style) [Alexandr Portnykh]
+> | * b997ad5 2013-10-13 | howto uses style.css [Alexandr Portnykh]
+> | * a1718e3 2013-10-13 | Added css stylesheet [Alexandr Portnykh]
+> |/  
+> * b23e57a 2013-10-13 | Added index.html. [Alexandr Portnykh]
+> * 366f1ed 2013-10-13 | Moved howto.html to lib [Alexandr Portnykh]
+> * 01abb92 2013-10-13 | Add an author/email comment [Alexandr Portnykh]
+> * 7b4c671 2013-10-13 | Added HTML header [Alexandr Portnykh]
+> * 5454d42 2013-10-13 | Added standard HTML page tags [Alexandr Portnykh]
+> * bbb6c6f 2013-10-13 | Added h1 tag [Alexandr Portnykh]
+> * 1820923 2013-10-13 | First Commit [Alexandr Portnykh]
+
+> Сбросить ветку master в точку до конфликтующего коммита
+$ git checkout master
+$ git hist
+> Коммит «Added README» идет непосредственно перед коммитом
+> конфликтующего интерактивного режима
+> сбросим ветку master к коммиту «Added README»
+$ git reset --hard e381443
+> HEAD is now at e381443 Added README
+$ git hist --all
+> * e381443 2013-10-13 | Added README (HEAD, master) [Alexandr Portnykh]
+> | * c9d0ded 2013-10-13 | Updated index.html (style) [Alexandr Portnykh]
+> | * b997ad5 2013-10-13 | howto uses style.css [Alexandr Portnykh]
+> | * a1718e3 2013-10-13 | Added css stylesheet [Alexandr Portnykh]
+> |/  
+> * b23e57a 2013-10-13 | Added index.html. [Alexandr Portnykh]
+> * 366f1ed 2013-10-13 | Moved howto.html to lib [Alexandr Portnykh]
+> * 01abb92 2013-10-13 | Add an author/email comment [Alexandr Portnykh]
+> * 7b4c671 2013-10-13 | Added HTML header [Alexandr Portnykh]
+> * 5454d42 2013-10-13 | Added standard HTML page tags [Alexandr Portnykh]
+> * bbb6c6f 2013-10-13 | Added h1 tag [Alexandr Portnykh]
+> * 1820923 2013-10-13 | First Commit [Alexandr Portnykh]
+----------------------------------------------------------------------------------------------------------------------
+> ПЕРЕБАЗИРОВАНИЕ
+> rebase вместо команды merge
+> мы вернулись в точку до первого слияния и хотим перенести изменения в
+> master в нашу ветку style
+
+$ git checkout style
+$ git rebase master
+> First, rewinding head to replay your work on top of it...
+> Applying: Added css stylesheet
+> Applying: howto uses style.css
+> Applying: Updated index.html
+$ git hist --all
+> * c9be87f 2013-10-13 | Updated index.html (HEAD, style) [Alexandr Portnykh]
+> * a601993 2013-10-13 | howto uses style.css [Alexandr Portnykh]
+> * 1d95540 2013-10-13 | Added css stylesheet [Alexandr Portnykh]
+> * e381443 2013-10-13 | Added README (master) [Alexandr Portnykh]
+> * b23e57a 2013-10-13 | Added index.html. [Alexandr Portnykh]
+> * 366f1ed 2013-10-13 | Moved howto.html to lib [Alexandr Portnykh]
+> * 01abb92 2013-10-13 | Add an author/email comment [Alexandr Portnykh]
+> * 7b4c671 2013-10-13 | Added HTML header [Alexandr Portnykh]
+> * 5454d42 2013-10-13 | Added standard HTML page tags [Alexandr Portnykh]
+> * bbb6c6f 2013-10-13 | Added h1 tag [Alexandr Portnykh]
+> * 1820923 2013-10-13 | First Commit [Alexandr Portnykh]
+
+> Конечный результат перебазирования очень похож на результат слияния.
+> Ветка style в настоящее время содержит все свои изменения, а также все изменения ветки
+> master. Однако, дерево коммитов значительно отличается. Дерево коммитов ветки style было
+> переписано таким образом, что ветка master является частью истории коммитов.
+> Это делает цепь коммитов линейной и гораздо более читабельной
+
+> Не используйте перебазирование …
+> 1.Если ветка является публичной и расшаренной. Переписывание общих
+> веток будет мешать работе других членов команды.
+> 2.Когда важна точная история коммитов ветки (так как команда rebase
+> переписывает историю коммитов).
+> Учитывая приведенные выше рекомендации, я предпочитаю использовать
+> rebase для кратковременных, локальных веток,
+> а слияние для веток в публичном репозитории.
+----------------------------------------------------------------------------------------------------------------------
+> Слияние style в master
+> Теперь сольем изменения style в ветку master
+
+$ git checkout master
+> Switched to branch 'master'
+$ git merge style
+> Updating e381443..c9be87f
+> Fast-forward
+>  index.html     | 5 ++++-
+>  lib/howto.html | 1 +
+>  lib/style.css  | 3 +++
+>  3 files changed, 8 insertions(+), 1 deletion(-)
+>  create mode 100644 lib/style.css
+
+> Поскольку последний коммит ветки master прямо предшествует последнему
+> коммиту ветки style,
+> git может выполнить ускоренное слияние-перемотку. При быстрой
+> перемотке вперед,
+> git просто передвигает указатель вперед, таким образом указывая на тот
+> же коммит, что и ветка style.
+> При быстрой перемотке конфликтов быть не может.
+
+$ git hist --all
+> * c9be87f 2013-10-13 | Updated index.html (HEAD, style, master) [Alexandr Portnykh]
+> * a601993 2013-10-13 | howto uses style.css [Alexandr Portnykh]
+> * 1d95540 2013-10-13 | Added css stylesheet [Alexandr Portnykh]
+> * e381443 2013-10-13 | Added README [Alexandr Portnykh]
+> * b23e57a 2013-10-13 | Added index.html. [Alexandr Portnykh]
+> * 366f1ed 2013-10-13 | Moved howto.html to lib [Alexandr Portnykh]
+> * 01abb92 2013-10-13 | Add an author/email comment [Alexandr Portnykh]
+> * 7b4c671 2013-10-13 | Added HTML header [Alexandr Portnykh]
+> * 5454d42 2013-10-13 | Added standard HTML page tags [Alexandr Portnykh]
+> * bbb6c6f 2013-10-13 | Added h1 tag [Alexandr Portnykh]
+> * 1820923 2013-10-13 | First Commit [Alexandr Portnykh]
+
+> Теперь ветки style и master идентичны
+----------------------------------------------------------------------------------------------------------------------
+> НЕСКОЛЬКО РЕПОЗИТОРИЕВ
+> создадим клон репозитория howto
+
+$ git clone howto cloned_howto
+> Cloning into 'cloned_howto'...
+> done.
+
+$ cd cloned_howto
+$ ls
+> index.html  lib  README
+$ git hist --all
+> * c9be87f 2013-10-13 | Updated index.html (HEAD, origin/style, origin/master, origin/HEAD, mas
+> * a601993 2013-10-13 | howto uses style.css [Alexandr Portnykh]
+> * 1d95540 2013-10-13 | Added css stylesheet [Alexandr Portnykh]
+> * e381443 2013-10-13 | Added README [Alexandr Portnykh]
+> * b23e57a 2013-10-13 | Added index.html. [Alexandr Portnykh]
+> * 366f1ed 2013-10-13 | Moved howto.html to lib [Alexandr Portnykh]
+> * 01abb92 2013-10-13 | Add an author/email comment [Alexandr Portnykh]
+> * 7b4c671 2013-10-13 | Added HTML header [Alexandr Portnykh]
+> * 5454d42 2013-10-13 | Added standard HTML page tags [Alexandr Portnykh]
+> * bbb6c6f 2013-10-13 | Added h1 tag [Alexandr Portnykh]
+> * 1820923 2013-10-13 | First Commit [Alexandr Portnykh]
+
+> ЧТО ТАКОЕ ORIGIN
+> Узнать об именах удаленных репозиториев
+
+$ git remote
+> origin
+
+> Чтобы посмотреть URL
+$ git remote -v
+
+$ git remote show origin
+> * remote origin
+>   Fetch URL: /home/archie/Projects/howto
+>   Push  URL: /home/archie/Projects/howto
+>   HEAD branch (remote HEAD is ambiguous, may be one of the following):
+>     master
+>     style
+>   Remote branches:
+>     master tracked
+>     style  tracked
+>   Local branch configured for 'git pull':
+>     master merges with remote master
+>   Local ref configured for 'git push':
+>     master pushes to master (up to date)
+
+> УДАЛЕННЫЕ ВЕТКИ
+> Посмотрим на ветки, доступные в клонированном репозитории
+
+$ git branch
+> * master
+> git branch выводит только список локальных веток по умолчанию
+
+> чтобы увидеть все ветки
+$ git branch -a
+> * master
+>   remotes/origin/HEAD -> origin/master
+>   remotes/origin/master
+>   remotes/origin/style
+
+> Git выводит все коммиты в оригинальный репозиторий, но ветки в удаленном репозитории
+> не рассматриваются как локальные. Если мы хотим собственную ветку style,
+> мы должны сами ее создать.
+
+> ИЗМЕНЕНИЕ ОРИГИНАЛЬНОГО РЕПОЗИТОРИЯ
+> Внести некоторые изменения в оригинальный репозиторий, чтобы затем попытаться извлечь
+> и слить изменения из удаленной ветки в текущую
+
+$ cd ~/Projects/howto
+> Внесите изменения в файл README в оригинальный репозиторий
+$ cat README.md
+> This is the howto World example from the git tutorial.
+> (changed in original)
+
+$ git add README
+$ git commit -m "Changed README in original repo"
+> [master 1223c07] Changed README in original repo
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+
+> Теперь в оригинальном репозитории есть более поздние изменения,
+> которых нет в клонированной версии
+----------------------------------------------------------------------------------------------------------------------
+> Извлекать изменения из удаленного репозитория
+> забрать изменения удаленной ветки из репозитария по умолчания,
+> основной ветки; той, которая была использована при клонировании
+> репозитария
+
+$ cd ~/Projects/cloned_howto
+$ git fetch
+> remote: Counting objects: 5, done.
+> remote: Compressing objects: 100% (3/3), done.
+> remote: Total 3 (delta 0), reused 0 (delta 0)
+> Unpacking objects: 100% (3/3), done.
+> From /home/archie/Projects/howto
+>    c9be87f..1223c07  master     -> origin/master
+
+$ git hist --all
+> * 1223c07 2013-10-13 | Changed README in original repo (origin/master, origin/HEAD) [Alexandr 
+> * c9be87f 2013-10-13 | Updated index.html (HEAD, origin/style, master) [Alexandr Portnykh]
+> * a601993 2013-10-13 | howto uses style.css [Alexandr Portnykh]
+> * 1d95540 2013-10-13 | Added css stylesheet [Alexandr Portnykh]
+> * e381443 2013-10-13 | Added README [Alexandr Portnykh]
+> * b23e57a 2013-10-13 | Added index.html. [Alexandr Portnykh]
+> * 366f1ed 2013-10-13 | Moved howto.html to lib [Alexandr Portnykh]
+> * 01abb92 2013-10-13 | Add an author/email comment [Alexandr Portnykh]
+> * 7b4c671 2013-10-13 | Added HTML header [Alexandr Portnykh]
+> * 5454d42 2013-10-13 | Added standard HTML page tags [Alexandr Portnykh]
+> * bbb6c6f 2013-10-13 | Added h1 tag [Alexandr Portnykh]
+> * 1820923 2013-10-13 | First Commit [Alexandr Portnykh]
+
+> в репозитории есть все коммиты из оригинального репозитория,
+> но они не интегрированы в локальные ветки клонированного репозитория
+
+> коммит «Changed README in original repo» включает в себя
+> коммиты «origin/master» и «origin/HEAD»
+
+> локальная ветка master указывает на «Updated index.html» коммит,
+> а не на новый коммит, который мы только что извлекли.
+
+> Вывод: команда «git fetch» будет извлекать новые коммиты из удаленного
+> репозитория, но не будет сливать их с наработками в локальных ветках
+
+> клонированный файл README не изменился
+$ cat README
+> This is the howto World example from the git tutorial.
+---------------------------------------------------------------------------------------------------------------------
+> СЛИЯНИЕ ИЗВЛЕЧЕННЫХ ИЗМЕНЕНИЙ
+> Перемещать извлеченные изменения в текущую ветку и рабочий каталог
+
+$ git merge origin/master
+> Updating c9be87f..1223c07
+> Fast-forward
+>  README | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+
+$ cat README
+> This is the howto World example from the git tutorial.
+> (changed in original)
+
+> Хотя команда «git fetch» не сливает изменения, мы можем вручную слить изменения
+> из удаленного репозитория.
+
+> ИЗВЛЕЧЕНИЕ И СЛИЯНИЕ ИЗМЕНЕНИЙ
+> Эквивалент git fetch + git merge origin/master
+$ git pull
+----------------------------------------------------------------------------------------------------------------------
+> ДОБАВЛЕНИЕ ВЕТКИ НАБЛЮДЕНИЯ
+> Добавлять локальную ветку, которая отслеживает изменения удаленной ветки
+
+> Ветки, которые начинаются с remotes/origin являются ветками оригинального репозитория
+> Обратите внимание, что у вас больше нет ветки под названием style, но он знает, что в
+> оригинальном репозитории ветка style была
+
+$ git branch --track style origin/style
+> Branch style set up to track remote branch style from origin.
+
+$ git branch -a
+> * master
+>   style
+>   remotes/origin/HEAD -> origin/master
+>   remotes/origin/master
+>   remotes/origin/style
+
+$ git hist --max-count=2
+> * 1223c07 2013-10-13 | Changed README in original repo (HEAD, origin/master, origin/HEAD, master) [Alexandr
+> * c9be87f 2013-10-13 | Updated index.html (origin/style, style) [Alexandr Portnykh]
+
+> Теперь мы можем видеть ветку style в списке веток и логе
+----------------------------------------------------------------------------------------------------------------------
+> ЧИСТЫЕ РЕПОЗИТОРИИ
+> Создавать чистые репозитории
+
+> В удаленных репозиториях нет смысла хранить рабочие файлы на диске (как это делается в
+> рабочих копиях), а все что им действительно нужно — это дельты изменений и другие
+> бинарные данные репозитория. Вот это и есть «чистый репозиторий».
+
+$ cd ~/Projects
+$ git clone --bare howto howto.git
+> Cloning into bare repository 'howto.git'...
+> done.
+
+$ ls howto.git
+> branches  config  description  HEAD  hooks  info  objects  packed-refs  refs
+
+> Репозитории, оканчивающиеся на «.git» являются чистыми репозиториями
+> Мы видим, что в репозитории howto.git нет рабочего каталога
+> По сути, это есть не что иное, как каталог .git нечистого репозитория
+----------------------------------------------------------------------------------------------------------------------
+> ДОБАВЛЕНИЕ УДАЛЕННОГО РЕПОЗИТОРИЯ
+> Добавить чистый репозиторий в качестве удаленного репозитория
+> к нашему оригинальному репозиторию
+
+$ cd howto
+$ git remote add sharedlocal ~/Projects/howto.git
+----------------------------------------------------------------------------------------------------------------------
+> ОТПРАВКА ИЗМЕНЕНИЙ
+> Отправлять изменения в удаленный репозиторий
+> Отредактируйте файл README и сделайте коммит
+> Сейчас мы находимся в репозитории howto
+
+$ cat README
+> This is the howto World example from the git tutorial.
+> (Changed in the original and pushed to shared)
+
+$ git checkout master
+M	README
+> Already on 'master'
+
+$ git add README
+$ git commit -m "Added shared comment to readme"
+> [master 59f3aa5] Added shared comment to readme
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+
+> Теперь отправьте изменения в общий репозиторий
+
+$ git push sharedlocal master
+> Counting objects: 5, done.
+> Delta compression using up to 4 threads.
+> Compressing objects: 100% (3/3), done.
+> Writing objects: 100% (3/3), 404 bytes | 0 bytes/s, done.
+> Total 3 (delta 0), reused 0 (delta 0)
+> To /home/archie/Projects/howto.git
+>    1223c07..59f3aa5  master -> master
+
+> Общим называется репозиторий, получающий отправленные нами изменения
+
+> Мы должны были явно указать ветку master для отправки изменений
+> Это можно настроить автоматически, но я все время забываю нужные команды
+> Для более простого управления удаленными ветками переключитесь в «Git Remote Branch»
+
+$ cd ~/Projects/howto
+$ git remote
+> shared
+
+$ git remote add shared https://github.com/4exob/howtow.git
+
+$ git push shared master
+> Username for 'https://github.com': 4exob
+> Password for 'https://4exob@github.com': 
+> Counting objects: 40, done.
+> Delta compression using up to 4 threads.
+> Compressing objects: 100% (31/31), done.
+> Writing objects: 100% (40/40), 3.90 KiB | 0 bytes/s, done.
+> Total 40 (delta 4), reused 0 (delta 0)
+> To https://github.com/4exob/howtow.git
+>  * [new branch]      master -> master
+
+$ git remote -v
+> sharedlocal	/home/archie/Projects/howto.git (fetch)
+> sharedlocal	/home/archie/Projects/howto.git (push)
+> shared	https://github.com/4exob/howtow.git (fetch)
+> shared	https://github.com/4exob/howtow.git (push)
+----------------------------------------------------------------------------------------------------------------------
+> ИЗВЛЕЧЕНИЕ ОБЩИХ ИЗМЕНЕНИЙ
+> Извлекать изменения из общего репозитория
+$ cd ~/Projects/cloned_howto
+$ git remote add sharedlocal ~/Projects/howto.git
+$ git branch --track sharedlocal master
+> Branch shared set up to track local branch master.
+
+$ git pull sharedlocal master
+> remote: Counting objects: 5, done.
+> remote: Compressing objects: 100% (3/3), done.
+> remote: Total 3 (delta 0), reused 0 (delta 0)
+> Unpacking objects: 100% (3/3), done.
+> From /home/archie/Projects/howto
+>  * branch            master     -> FETCH_HEAD
+>  * [new branch]      master     -> shared/master
+> Updating 1223c07..59f3aa5
+> Fast-forward
+>  README | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ cat README.md
+> This is the howto World example from the git tutorial.
+> (Changed in the original and pushed to shared)
+----------------------------------------------------------------------------------------------------------------------
+> РАЗМЕЩЕНИЕ ВАШИХ GIT РЕПОЗИТОРИЕВ
+> Настраивать git сервер для совместного использования репозиториев
+> Запуск git сервера (From the work directory)
+$ cd ~/Projects
+
+$ git daemon --verbose --export-all --base-path=.
+> [17695] Ready to rumble
+> ...
+
+> В отдельном терминале перейдите From the work directory
+$ cd ~/Projects
+
+$ git clone git://localhost/howto.git network_howto
+> Cloning into 'network_howto'...
+> remote: Counting objects: 40, done.
+> remote: Compressing objects: 100% (31/31), done.
+> remote: Total 40 (delta 4), reused 0 (delta 0)
+> Receiving objects: 100% (40/40), done.
+> Resolving deltas: 100% (4/4), done.
+> Checking connectivity... done
+
+$ ls
+> cloned_howto  howto  howto.git  howto  network_howto
+
+> ...
+> [17705] Connection from 127.0.0.1:53124
+> [17705] Extended attributes (16 bytes) exist <host=localhost>
+> [17705] Request upload-pack for '/howto.git'
+> [17695] [17705] Disconnected
+
+> Вы увидите копию проекта
+
+> Если вы хотите совершить отправку в репозиторий Git Daemon,
+> добавьте метку --enable=receive-pack к команде git daemon
+> Будьте осторожны, этот сервер не производит аутентификацию,
+> поэтому любой может отправлять изменения в ваш репозиторий
+----------------------------------------------------------------------------------------------------------------------
+> Git: Как пофиксить detached HEAD
+> Если git при комите ругается, что у вас detached HEAD, то пофиксить
+> можно 4-мя командами:
+
+$ git branch temp
+$ git checkout temp
+$ git branch -f master temp
+$ git checkout master
+
+> И, опционально,
+$ git branch -d temp
+
+> Что при этом происходит
+> 1. создаем временную ветку с текущего положения HEAD
+> 2. переключаемся на временную ветку
+> 3. сбросить master до позиции в temp
+> 4. переключиться на мастер
+> 5. удалить временную ветку

@@ -1,0 +1,8 @@
+#!/bin/bash
+rm *.png
+#
+convert -background none -fill '#4d4d4d' -font My-Font-[object-Object] -pointsize 100 label:'Кухня 220см' 220.png
+convert -background none -fill '#4d4d4d' -font My-Font-[object-Object] -pointsize 100 label:'Кухня 260см' 260.png
+convert -background none -fill '#4d4d4d' -font My-Font-[object-Object] -pointsize 100 label:'Кухня 260см с пеналом' 260p.png
+convert -background none -fill '#4d4d4d' -font My-Font-[object-Object] -pointsize 100 label:'Кухня 220x100см угловая' 220p100.png
+convert -background none -fill '#4d4d4d' -font My-Font-[object-Object] -pointsize 100 label:'Кухня 240x100см угловая' 240p100.png

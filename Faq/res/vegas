@@ -1,0 +1,156 @@
+#!/bin/bash
+rm *.png
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:8 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:500 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 001.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:1 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:0 -crop 65x130+0+0 label2.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:200 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 002.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:1 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:2 -crop 65x130+0+0 label2.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:700 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 003.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:1 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:1 -crop 65x130+0+0 label2.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:900 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 004.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:4 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:600 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 005.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:6 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:900 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 006.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:6 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:200 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 007.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:1 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:900 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 008.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:2 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:300 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 009.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:2 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:500 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 010.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:3 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:200 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 011.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:2 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:700 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 012.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:3 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:700 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 013.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:6 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:900 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 014.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:6 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:500 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 015.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:4 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:900 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 016.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:7 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:400 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 017.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:1 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:800 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 018.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:2 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:500 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 019.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:1 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:400 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 020.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:0 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 100 label:700 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 021.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:3 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:900 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 022.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:2 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:200 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 023.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:2 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:500 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 024.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:5 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:300 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 025.png
+rm label*.*
+#-------------------------------

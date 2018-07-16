@@ -1,0 +1,372 @@
+--------------------------[ Сценарий для локального Магазина ]------------------
+
+$ sudo rm -rf ~/www/stock-price.ru
+
+$ sudo systemctl start php-fpm
+$ sudo systemctl start nginx
+$ sudo systemctl start mysqld
+
+$ mysql -u root -p
+]> show databases;
+]> drop database имя_базы;
+]> CREATE DATABASE имя_базы;
+]> exit
+
+$ cd ~/.../import
+$ find . -iregex '.*.jpg' -exec mogrify -resize x900 {} {} \;
+
+$ cp ~/.../import ~/www/stock-price.ru/themes
+
+$ chmod 755 ~/www
+$ chmod 755 ~/www/stock-price.ru
+$ find ~/www/stock-price.ru -type f -print0 | xargs -0 chmod 664
+$ find ~/www/stock-price.ru -type d -print0 | xargs -0 chmod 775
+$ sudo chown -R archie:http ~/www/stock-price.ru
+
+$ rm -rf ~/www/stock-price.ru/install
+
+
+$ chmod 755 ~/www/xn----7sbadcxbt6agi8a1c6b5ewb.xn--p1ai
+$ find ~/www/xn----7sbadcxbt6agi8a1c6b5ewb.xn--p1ai -type f -print0 | xargs -0 chmod 664
+$ find ~/www/xn----7sbadcxbt6agi8a1c6b5ewb.xn--p1ai -type d -print0 | xargs -0 chmod 775
+$ sudo chown -R archie:http ~/www/xn----7sbadcxbt6agi8a1c6b5ewb.xn--p1ai
+
+
+ >> М.[Очистка PrestaShop eng.PSCLEANER]
+
+ >> НАСТРОЙКИ =Шаблоны =ШАБЛОН
+           =Конфигуратор шаблона ОТКЛЮЧАЕМ ВСЕ кроме =Показать контактную информацию
+                    =Управление хуками
+                         =Начать "Живое редактирование"
+
+           =Расширенные настройки
+            Количество товаров на странице:16
+
+ >> /themes/default-bootstrap/product-list.tpl переменная nbItemsPerLine
+
+ {if $page_name !='index' && $page_name !='product'}
+	{assign var='nbItemsPerLine' value=3}
+ ........
+	{assign var='nbItemsPerLine' value=4}
+
+ >> /themes/default-bootstrap/product-list.tpl
+
+ <li class="ajax_block_product{if $page_name == 'index' || $page_name == 'product'} col-xs-12 col-sm-4 col-md-3{else} col-xs-12 col-sm-6 col-md-4
+ ........
+ <li class="ajax_block_product{if $page_name == 'index' || $page_name == 'product'} col-xs-12 col-sm-4 col-md-3{else} col-xs-12 col-sm-6 col-md-3
+
+ >> ЛОКАЛИЗАЦИЯ =Валюты =Десятичные:НЕТ [Округление]
+                =Налоги =Разрешить НДС:НЕТ [Отключаем НДС]
+
+ >> НАСТРОЙКИ =Изображения =Редактировать:thickbox_default
+            Ширина:?1200
+            Высота:?900
+            Метод генерации:Высота
+
+$ convert -background '#f13340' -fill white -font Impact -pointsize 75 label:' stock-price.ru ' wm.gif
+
+ >> М.[Watermark]
+            Watermark transparency (1-100): 35
+            Watermark X align: середина
+            Watermark Y align: низ
+            Choose image types .. : thickbox_default (1200 x 900)
+
+ >> РАСШИРЕНЫЕ ПАРАМЕТРЫ =Импорт CSV =Категории
+                                     =Товары
+                                     =Комбинации
+                         =Использовать все номера ID:ДА
+
+ >> НАСТРОЙКИ =Товары =СТРАНИЦА ТОВАРА
+            Показывать количество товара:НЕТ
+            Показывать остаток, если количество стало меньше, чем:1
+                     =ЗАПАСЫ ТОВАРОВ
+            Разрешить заказ товаров с нулевым остатком на складе:НЕТ
+
+ >> НАСТРОЙКИ =SEO и URLs
+            URL-АДРЕСА УСТАНОВКИ/ЧПУ:ДА
+
+            
+~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!
+1. НАСТРОЙКИ =Заказы =ОБЩЕЕ
+            Включить "Гостевую" покупку:ДА
+
+2. НАСТРОЙКИ =SEO и URLs
+            =Index -> УДАЛИТЬ -Магазин создан на PrestaShop
+            =Index -> ЗАПОЛНИТЬ Title
+            ...
+            =Служебная страница -> ЗАПОЛНИТЬ Title
+
+   НАСТРОЙКИ =КОНТАКТЫ МАГАЗИНА
+
+ М.[Текстовый редактор главной страницы eng.EDITORIAL] (текст под Высокочастотные запросы)
+ М.[Слайдшоу для Вашей домашней страницы]
+ М.[Блок контактов]
+ М.[Блок пунктов выдачи]
+ 
+ М.[Блок многоуровневых навигационных фильтров] (фильтр)
+ М.[Товары в той же категории] (Отображать цены товаров в блоке:ДА)
+ М.[Комментарии к товару] (Разрешить гостям комментарии:ДА)
+ М.[Блок категорий]
+
+ М.[Новые товары] (12-60-НЕТ)
+ М.[Рекомендуемые товары на главной] (8) ПОПУЛЯРНОЕ
+ М.[Блок лидеров продаж] (НЕТ)
+
+ М.[1-Click Upgrade]
+ М.[Импорт/экспорт шаблонов] Template Installer
+ М.[Обработка данных статистики]
+
+Отключить:
+М.[Блок Моя учетная запись в подвале
+
+
+ ?М.[Блок рассылки]
+ ?М.[Кросс-продажи]
+ ?М.[Оповещения по почте]
+ ?М.[Рассылка]
+ ?М.[Рекламный блок]
+
+
+-----------------------------[ Убираем Prestashop ]-----------------------------
+
+
+М.[Слайдшоу на главной странице homeslider]
+          СПИСОК СЛАЙДОВ =Ссылка: http://www.stock-price.ru/...
+М.[CMS блок]
+          Display "Powered by PrestaShop"
+
+
+--------------------------[ Доведение магазина до ума ]-------------------------
+
+1. НАСТРОЙКИ =SEO и URLs =ГЕНЕРАТОР ФАЙЛОВ ROBOTS: Генерировать robots.txt
+   М.[Google Analytics]
+   М.[Карта сайта Google sitemap]
+отключаем все кроме
+Address [address]
+Best sales [best-sales]
+Discount [discount]
+Identity [identity]
+
+[module-blockwishlist-view]
+New products [new-products]
+
+Addresses [addresses]
+Мебельный интернет-магазин – корпусная и мягкая мебель, большой выбор в каталоге мебели [index]
+
+Stores [stores]
+
+2. Я.Метрика
+   site.ru/themes/.../footer.tpl
+            </div>
+            {literal}
+            <!-- Yandex.Metrika informer -->
+            ---    Твой код ---
+            <!-- /Yandex.Metrika counter -->
+            {/literal}
+            {/if}
+            </body>
+            </html>
+~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!
+8. РАСШИРЕНЫЕ ПАРАМЕТРЫ =Веб службы Включить
+            Webservice:ДА
+            Включить режим CGI в PHP:ДА
+
+9. РАСШИРЕНЫЕ ПАРАМЕТРЫ =Производительность =SMARTY
+            Кэш:ДА
+                        =Производительность ККК (КОМБИНИРОВАНИЕ, КОМПРЕССИЯ И КЭШИРОВАНИЕ)
+            Умное кэширование CSS:ДА
+            Умное кэширование JavaScript:ДА
+            Минификация HTML:НЕТ
+            Сжатие встроенного в HTML JavaScript:ДА
+                        =КЭШИРОВАНИЕ
+            Использовать кэширование:ДА
+
+11. НАСТРОЙКИ =ОБЩЕЕ
+            Разрешить iframes в HTML полях:НЕТ
+            Use HTMLPurifier Library:НЕТ
+~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!
+
+-----------------------[ Сценарий для Магазина на VDS/dedicated ]---------------
+
+p.s. Параметры сети (Вам ее нужно будет настроить вручную):
+ip 0.00.000.62
+netmask 255.255.255.0
+gateway 0.00.000.1
+dns 8.8.8.8
+dns 8.8.4.4
+
+# ip a
+# ifconfig eth0 0.00.000.62 netmask 255.255.255.0
+# route add default gw 0.00.000.1
+# nano /etc/resolv.conf
+       nameserver 8.8.8.8
+       nameserver 8.8.4.4
+
+
+$ df -h свободное место на диске
+$ fdisk -l
+
+-------------------------------[ Поднимаем сеть ]-------------------------------
+
+$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default 
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:00:00:00:00:76 brd ff:ff:ff:ff:ff:ff
+    inet 0.00.000.62/24 brd 0.00.000.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 0000::0000:00:0000:0000/64 scope link 
+       valid_lft forever preferred_lft forever
+
+$ sudo nano /etc/udev/rules.d/10-network.rules
+SUBSYSTEM=="net" ACTION=="add" ATTR{address}=="00:00:00:00:00:76" NAME="stock_eth0"
+
+$ sudo nano /etc/systemd/system/network@stock_eth0.service 
+[Unit]
+Description=Network connectivity (stock_eth0)
+BindsTo=sys-subsystem-net-devices-stock_eth0.device
+After=sys-subsystem-net-devices-stock_eth0.device
+Before=network.target
+Wants=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+
+ExecStart=/usr/bin/ip link set dev stock_eth0 up
+ExecStart=/usr/bin/ip addr add 0.00.000.62/24 broadcast 0.00.000.255 dev stock_eth0
+ExecStart=/usr/bin/ip route add defaultip  via 0.00.000.1
+
+ExecStop=/usr/bin/ip addr flush dev stock_eth0
+ExecStop=/usr/bin/ip link set dev stock_eth0 down
+
+[Install]
+WantedBy=multi-user.target
+
+$ sudo nano /etc/resolv.conf
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+
+$ sudo systemctl enable network@stock_eth0.service
+$ sudo systemctl start network@stock_eth0.service
+
+-------------------------------[ Настраиваем ssh ]------------------------------
+
+$ sudo nano /etc/ssh/ssh_config
+...
+Port 22
+Protocol 2
+...
+
+$ sudo nano /etc/ssh/sshd_config
+...
+Port 22
+Protocol 2
+AllowUsers user
+LoginGraceTime 120
+PermitRootLogin no
+AuthorizedKeysFile	.ssh/authorized_keys
+ChallengeResponseAuthentication no
+UsePAM yes
+PrintMotd no # pam does that
+UsePrivilegeSeparation sandbox		# Default for new installations.
+Subsystem	sftp	/usr/lib/ssh/sftp-server
+...
+
+sudo nano /etc/systemd/system/sshd.socket
+[Unit]
+Conflicts=sshd.service
+Wants=sshdgenkeys.service
+
+[Socket]
+ListenStream=22
+Accept=yes
+FreeBind=true
+
+[Install]
+WantedBy=sockets.target
+
+$ rm ~/.ssh/known_hosts
+$ ssh -p 2525 archie@0.00.000.62
+
+-------------------------------------[ Подготовка ]-----------------------------
+
+   $ cd ~/download/_p.s.v.e.r
+   $ wget http://www.prestashop.com/download/prestashop_p.s.v.e.r.zip
+   $ unzip prestashop_p.s.v.e.r.zip
+   $ mv prestashop/* .
+   $ rm prestashop_p.s.v.e.r.zip
+   $ rmdir prestashop/
+
+   старый импорт
+   $ cp -a ~/www/site.ru/import ~/download/_p.s.v.e.r/
+   или
+   $ scp -P 22 -r ~/../import user@0.00.000.62:~/download/_p.s.v.e.r/
+
+   копируем
+   robots.txt sitemap.xml google#.html yandex_#.html
+
+  
+ $ mysql -u root -p
+      ]> show databases;
+      ]> drop database stockb;
+      ]> CREATE DATABASE dbname;
+
+CREATE USER user@localhost IDENTIFIED BY password
+GRANT ALL ON dbname.* TO user@localhost
+
+      ]> GRANT ALL ON dbname.* TO xuser@localhost IDENTIFIED BY '912566';
+      ]> SHOW GRANTS FOR xuser@localhost;
+      ]> exit
+
+
+
+   $ rm -rf ~/www/site.ru
+   $ cp -a ~/download/_p.s.v.e.r ~/www/site.ru
+
+   $ chmod 755 ~/www
+   $ chmod 755 ~/www/site.ru
+   $ find ~/www/site.ru -type f -print0 | xargs -0 chmod 664
+   $ find ~/www/site.ru -type d -print0 | xargs -0 chmod 775
+   $ sudo chown -R archie:http ~/www/site.ru
+
+   $ rm -rf ~/www/site.ru/install
+
+
+
+-------------------------------[ Настраиваем php mail ]-------------------------
+
+https://www.digitalocean.com/community/tutorials/how-to-setup-exim-spamassassin-clamd-and-dovecot-on-an-arch-linux-vps
+
+$ yaourt -S exim
+$ sudo nano /etc/mail/exim.conf
+
+primary_hostname = yourdomain.com
+domainlist local_domains = @ : yourdomain.com
+spamd_address = 127.0.0.1 783
+
+acl_check_data:
+
+deny    malware    = *
+        message    = This message contains a virus ($malware_name).
+warn    spam       = nobody
+        add_header = X-Spam_score: $spam_score\n\
+                    X-Spam_score_int: $spam_score_int\n\
+                    X-Spam_bar: $spam_bar\n\
+                    X-Spam_report: $spam_report
+
+$ sudo systemctl enable exim
+$ sudo systemctl start exim
+
+$ sudo tail /var/log/exim/mainlog
+
+--------------------------[ ssh:копирование файлов ]----------------------------
+$ scp -P 22 -r ~/www/xn----7sbadcxbt6agi8a1c6b5ewb.xn--p1ai archie@217.12.199.150:~/www/
+
+$ scp -P 22 -r ~/Projects/source_cms/452 user@0.00.000.62:~/download/
+$ scp -P 22 -r user@0.00.000.62:~/download/78 ~/Загрузки/
+или без -r для файлов

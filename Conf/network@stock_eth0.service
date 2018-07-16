@@ -1,0 +1,20 @@
+[Unit]
+Description=Network connectivity (stock_eth0)
+BindsTo=sys-subsystem-net-devices-stock_eth0.device
+After=sys-subsystem-net-devices-stock_eth0.device
+Before=network.target
+Wants=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+
+ExecStart=/usr/bin/ip link set dev stock_eth0 up
+ExecStart=/usr/bin/ip addr add 5.34.183.62/24 broadcast 5.34.183.255 dev stock_eth0
+ExecStart=/usr/bin/ip route add default via 5.34.183.1
+
+ExecStop=/usr/bin/ip addr flush dev stock_eth0
+ExecStop=/usr/bin/ip link set dev stock_eth0 down
+
+[Install]
+WantedBy=multi-user.target

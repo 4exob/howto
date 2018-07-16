@@ -1,0 +1,31 @@
+#!/bin/bash
+rm *.png
+#----------------
+#convert -background none -fill white -font My-Font-Regular -pointsize 420 label:'ФАБРИЧНАЯ ' shadow0.png
+#convert -background none -fill white -font My-Font-Regular -pointsize 50 label:' ' shadow1.png
+#convert -background none -fill white -font My-Font-Regular -pointsize 660 label:'МЕБЕЛЬ ' shadow.png
+#convert -background none -gravity Center shadow0.png shadow1.png shadow.png -append logo0.png
+#rm shadow*.*
+#----------------
+#convert -background none -fill white -font Fira-Sans-Bold -pointsize 418 label:'avito.ru/100k' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage wm.png
+#convert -background none -fill white -font My-Font-Regular -pointsize 420 label:'ФАБРИЧНАЯ ' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage shadow0.png
+#convert -background none -fill white -font My-Font-Regular -pointsize 50 label:' ' shadow1.png
+#convert -background none -fill white -font My-Font-Regular -pointsize 660 label:'МЕБЕЛЬ ' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage shadow.png
+#convert -background none -gravity Center shadow0.png shadow1.png shadow.png -append logo1.png
+#rm shadow*.*
+#----------------STAR
+#convert -background none -fill white -font PizzaDude-Stars -pointsize 300 label:t -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage -crop 230x230+0+0 star0.png
+#-->convert -background none -fill white -font PizzaDude-Stars -pointsize 300 label:'t t' star.png
+#----------------
+#convert -background none -fill white -font My-Font-Regular -pointsize 420 label:'Отличного качества' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage ban1.png
+#convert -background none -fill white -font My-Font-Regular -pointsize 420 label:'по доступным ценам в кратчайшие сроки!' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage ban2.png
+#rm shadow*.*
+#----------------Баннер
+convert -background none -fill white -font My-Font-Regular -pointsize 1500 label:'ОТЛИЧНАЯ ' shadow1.png
+convert -background none -fill white -font My-Font-Regular -pointsize 1500 label:'мебель ' shadow2.png
+convert -background none -fill white -font My-Font-Regular -pointsize 1500 label:'по СУПЕР ценам ' shadow3.png
+convert -background none -fill white -font My-Font-Regular -pointsize 1500 label:'! ' shadow4.png
+#----------------Баннер
+#convert -background none -fill white -font BebasNeueBold -pointsize 1500 label:'РАССРОЧКА ' shadow1.png
+#convert -background none -fill white -font BebasNeueBold -pointsize 500 label:'БЕЗ БАНКА ' shadow2.png
+#convert -background none -fill white -font BebasNeueBold -pointsize 1500 label:'0% ' shadow3.png

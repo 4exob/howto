@@ -1,0 +1,162 @@
+r0V3<3+dhRhf dbname
+-------------------Настройка MySQL
+$ sudo pacman -S percona-server
+$ sudo systemctl start mysqld
+$ mysql_secure_installation
+
+...
+Enter current password for root (enter for none): [Enter]
+OK, successfully used password, moving on...
+
+Setting the root password ensures that nobody can log into the MariaDB
+root user without the proper authorisation.
+
+Set root password? [Y/n] y [Enter]
+Remove anonymous users? [Y/n] y [Enter]
+Disallow root login remotely? [Y/n] y [Enter]
+Remove test database and access to it? [Y/n] y [Enter]
+Reload privilege tables now? [Y/n] y [Enter]
+
+$ sudo systemctl restart mysqld 
+$ sudo systemctl enable mysqld
+
+-------------------Настройка Nginx + PHP
+$ sudo pacman -S nginx php php-fpm php-mcrypt perl-soap-lite php-gd sqlite php-sqlite php-apcu
+
+$ sudo gedit /etc/php/php.ini
+
+open_basedir= /srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/share/webapps/:/etc/webapps/
+
+expose_php=Off
+max_execution_time=300
+max_input_time=-1
+max_input_vars = 10000
+memory_limit = 128M
+post_max_size = 64M #20M
+upload_max_filesize = 32M #25M
+
+#memory_limit > post_max_size > upload_max_filesize
+
+cgi.fix_pathinfo=0
+extension=curl.so
+extension=gd.so
+extension=gettext.so
+extension=iconv.so
+extension=mcrypt.so
+extension=mysqli.so
+extension=mysql.so
+extension=openssl.so
+extension=pdo_mysql.so
+extension=soap
+extension=sqlite3.so
+mysqli.allow_local_infile = On
+session.save_path="/tmp"
+
+date.timezone = "Europe/Moscow"
+
+sudo gedit /etc/php/conf.d/00-ioncube_loader.ini
+zend_extension = /usr/lib/php/modules/ioncube_loader.so
+
+sudo gedit /etc/php/conf.d/apcu.ini
+extension=apcu.so
+
+sudo gedit /etc/php/conf.d/05-opcache.ini
+zend_extension = opcache.so
+opcache.memory_consumption = 512
+opcache.max_accelerated_files = 50000
+
+; following can be commented for production server
+opcache.revalidate_freq = 0
+opcache.consistency_checks = 1
+
+$ sudo gedit /etc/nginx/nginx.conf
+
+> Проверка работы никса
+
+#user http;
+...
+server {
+        listen 80;
+        server_name localhost;
+        root /srv/http;
+
+        location ~ \.php$ {
+            fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include /etc/nginx/fastcgi_params;
+        }
+        location /phpmyadmin {
+            rewrite ^/* /phpMyAdmin last;
+        }
+        location / {
+            index index.php;
+        }
+}
+
+$ sudo gedit /srv/http/index.php
+
+<?php phpinfo(); ?>
+
+$ sudo systemctl start php-fpm
+$ sudo systemctl start nginx
+$ sudo systemctl enable php-fpm
+$ sudo systemctl enable nginx
+
+$ sudo pacman -S mysql
+$ sudo systemctl start mysqld
+$ sudo systemctl enable mysqld
+
+$ mysql_secure_installation
+
+$ sudo pacman -S phpmyadmin
+
+$ sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpMyAdmin
+
+> Настройка виртуального хоста
+
+$ sudo mkdir /etc/nginx/conf.d
+$ sudo mkdir /etc/nginx/sites-available
+$ sudo mkdir /etc/nginx/sites-enabled
+
+$ sudo mkdir /var/log/nginx/site
+$ sudo gedit /etc/nginx/sites-available/xn----7sbadcxbt6agi8a1c6b5ewb.conf
+$ sudo gedit /etc/nginx/sites-available/phpmyadmin.conf
+$ sudo gedit /etc/nginx/conf.d/php.conf
+$ sudo gedit /etc/nginx/nginx.conf
+
+$ sudo ln -sr /etc/nginx/sites-available/site.conf /etc/nginx/sites-enabled/
+$ sudo ln -sr /etc/nginx/sites-available/phpmyadmin.conf /etc/nginx/sites-enabled/
+
+$ sudo ln -sr /etc/nginx/sites-available/xn----7sbadcxbt6agi8a1c6b5ewb.conf /etc/nginx/sites-enabled/
+
+$ sudo ln -sr /etc/nginx/sites-available/xn----8sbabcub1axgt8a1c6b3dxc.conf /etc/nginx/sites-enabled/
+
+-------------------Редирект NginX на другой сайт
+
+Ключевая фраза для поиска: nginx permanent redirect
+
+Если нужно редиректить все ссылки:
+server {
+    listen 80;
+    listen 443 ssl;
+    server_name www.old-name.com old-name.com;
+    return 301 $scheme://www.new-name.com;
+}
+
+Если только конкретные:
+location /old-url {
+    return 301 https://www.new-name.com;
+}
+
+-------------------Настройка localhost
+$ sudo gedit /etc/hosts
+
+127.0.0.1	linux	localhost
+127.0.0.2	e-shop.loc
+127.0.0.3	image.loc
+127.0.0.4	opencart
+127.0.0.5	prestashop
+
+#::1		linux	localhost
+

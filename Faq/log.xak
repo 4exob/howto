@@ -1,0 +1,68 @@
+---------------------------[ fix:Pack of existing products ]------------------------
+$ sudo nano ~/www/site.ru/admin0000/themes/default/template/controllers/products/helpers/form/form.tpl
+строка 305
+меняем {if $tab.name != "Pack" } на {if $tab.id != "Pack" }
+
+----------------------------------[ Meta generator ]----------------------------
+$ sudo nano ~/www/site.ru/themes/default-bootstrap/header.tpl
+строка 40 удалить
+<meta name="generator" content="PrestaShop" />
+
+----------------------------------[ fix:menu_configure ]----------------------------
+$ sudo nano ~/www/site.ru/modules/blockcontactinfos/translations/ru.php
+меняем 'menu_configure' на 'Информация о магазине'
+
+-------------------------------[ Фильтр -> Meta Title ]-------------------------
+$ sudo nano ~/www/site.ru/modules/blocklayered/blocklayered.php
+строка 3084
+'heading' => $meta_title, на 'heading' => $category->name,
+
+--------------------------[ отключение показ подкатегорий-1 ]-------------------
+$ sudo nano ~/www/site.ru/themes/default-bootstrap/category.tpl
+
+                            <div class="cat_desc">
+{*                            <span class="category-name">
+*                                {strip}
+*                                    {$category->name|escape:'html':'UTF-8'}
+*                                    {if isset($categoryNameComplement)}
+*                                        {$categoryNameComplement|escape:'html':'UTF-8'}
+*                                    {/if}
+*                                {/strip}
+*                            </span>
+*}                            {if Tools::strlen($category->description) > 350}
+
+--------------------------[ отключение показ подкатегорий-2 ]-------------------
+$ sudo nano ~/www/site.ru/themes/default-bootstrap/category.tpl
+
+        name|escape:'html':'UTF-8'}{if isset($categoryNameComplement)}&nbsp;{$categoryNameComplement|escape:'html':'UTF-8'}...
+{*		{if isset($subcategories)}
+*		<!-- Subcategories -->
+*		<div id="subcategories">
+*			<p class="subcategory-heading">{l s='Subcategories'}</p>
+*			<ul class="clearfix">
+*			{foreach from=$subcategories item=subcategory}
+*				<li>
+*                	<div class="subcategory-image">
+*                	                 ...
+*					{if $subcategory.description}
+*						<div class="cat_desc">{$subcategory.description}</div>
+*					{/if}
+*				</li>
+*			{/foreach}
+*			</ul>
+*		</div>
+*		{/if}
+*}		{if $products}
+
+---------------------------[ | ]--------------------
+
+----------------------------------[ удаления заявок ]---------------------------
+$ sudo nano ~/www/site.ru/controllers/admin/AdminOrdersController.php
+            public function __construct()
+            {
+                $this->addRowAction('view');
+                //--------------------------------------------
+                $this->addRowAction('delete');
+                $this->bulk_actions = array('delete' => array('text' => $this->l('Delete Selected'), 'confirm' =>...
+                //--------------------------------------------
+                $this->explicitSelect = true;

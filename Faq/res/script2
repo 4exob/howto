@@ -1,0 +1,38 @@
+#!/bin/bash
+
+#find -name '*.jpg' -exec mogrify -resize x1160 {} {} \;
+#find -name '*.jpg' -exec convert -gravity center -crop 97x99%\! {} {} \;
+
+IFS=$'\n' _ar=(`find -name '*.jpg'`)
+for _i in "${_ar[@]}"; do
+    mogrify -resize x1200 $_i
+    mogrify -gravity center -crop ШxВ%\! $_i
+
+#---по ШИРИНЕ----------------------------------------
+#	mogrify -gravity east -crop Шx100%\! $_i
+#	mogrify -gravity west -crop Шx100%\! $_i
+#====================================================
+#   mogrify -gravity east -extent 110x100%\! $_i
+#   mogrify -gravity center -extent 90x100%\! $_i
+#	mogrify -gravity west -extent 105x100%\! $_i
+#	mogrify -gravity west -extent 110x100%\! $_i
+#	mogrify -gravity center -extent 90x100%\! $_i
+#	mogrify -gravity east -extent 105x100%\! $_i
+##	
+#	mogrify -gravity west -extent 96x100%\! $_i
+#   mogrify -gravity center -extent 90x100%\! $_i
+
+#---по ВЫСОТЕ----------------------------------------
+#	mogrify -gravity north -crop 100xВ%\! $_i
+#	mogrify -gravity south -crop 100xВ%\! $_i
+#====================================================
+#	mogrify -gravity south -extent 100x110%\! $_i
+#   mogrify -gravity center -extent 100x90%\! $_i
+#	mogrify -gravity north -extent 100x110%\! $_i
+#	mogrify -gravity north -extent 100x105%\! $_i
+#	mogrify -gravity center -extent 100x90%\! $_i
+#	mogrify -gravity south -extent 100x105%\! $_i
+##	
+#	mogrify -gravity north -extent 100x96%\! $_i
+#   mogrify -gravity center -extent 100x90%\! $_i
+done

@@ -1,0 +1,11 @@
+[Unit]
+Conflicts=sshd.service
+Wants=sshdgenkeys.service
+
+[Socket]
+ListenStream=2525
+Accept=yes
+FreeBind=true
+
+[Install]
+WantedBy=sockets.target

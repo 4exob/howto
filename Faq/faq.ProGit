@@ -1,0 +1,78 @@
+yaourt -S smartgithg tk gitg
+
+отправлять (push)
+получать (pull)
+извлечь (fetch)
+
+$ git add *.c
+
+Удалить файл из индекса, оставив его при этом в рабочем каталоге
+$ git rm --cached readme.txt
+
+.gitignore
+# комментарий — эта строка игнорируется
+# не обрабатывать файлы, имя которых заканчивается на .a
+*.a
+# НО отслеживать файл lib.a, несмотря на то, что мы игнорируем все .a файлы с помощью предыдущего правила
+!lib.a
+# игнорировать только файл TODO находящийся в корневом каталоге, не относится к файлам вида subdir/TODO
+/TODO
+# игнорировать все файлы в каталоге build/
+build/
+# игнорировать doc/notes.txt, но не doc/server/arch.txt
+doc/*.txt
+# игнорировать все .txt файлы в каталоге doc/
+doc/**/*.txt
+
+Игнорирование индексации
+$ git commit -a -m 'added new benchmarks'
+
+Удаление файлов
+$ git rm <file>
+
+Если вы изменили файл и уже проиндексировали его
+$ git rm -f <file>
+
+Команда удаляет все файлы, которые имеют расширение .log в каталоге log/
+$ git rm log/\*.log
+
+Команда удаляет все файлы, чьи имена заканчиваются на ~
+$ git rm \*~
+
+Перемещение файлов
+$ git mv file_from file_to
+
+Изменение последнего коммита
+$ git commit --amend
+
+Отмена индексации файла
+$ git reset HEAD <file>
+
+Отмена изменений файла
+$ git checkout -- <file>
+
+Отображение удалённых репозиториев
+$ git remote -v
+
+Извлекает все наработки
+$ git fetch origin
+
+Отправка наработок на сервер
+$ git push origin master
+$ git push origin --tags
+
+Инспекция удалённого репозитория
+$ git remote show origin
+
+Удаление и переименование удалённых репозиториев
+$ git remote rm paul
+$ git remote rename pb paul
+
+Обход роскомпутинцензуры
+$ git config --global http.proxy socks5://localhost:9050
+$ git config --global https.proxy socks5://localhost:9050
+$ yaourt -S tor torsocks
+$ sudo systemctl start tor.service
+
+
+

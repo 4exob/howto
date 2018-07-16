@@ -1,0 +1,26 @@
+#!/bin/bash
+rm *.png
+#
+#-------------------------------
+#convert -background none -fill white -font Days-Regular -pointsize 60 label:'Фабричная мебель.рф' shadow1.png
+#convert -background none -fill white -font Days-Regular -pointsize 60 label:'ФАБРИЧНАЯ МЕБЕЛЬ.рф' shadow2.png
+#convert -background none -fill white -font Days-Regular -pointsize 60 label:'Фабричная-мебель.рф' shadow3.png
+#convert -background none -fill white -font Days-Regular -pointsize 60 label:'ФАБРИЧНАЯ-МЕБЕЛЬ.рф' shadow4.png
+#convert -background none -gravity West shadow*.* -append label.png
+#rm shadow*.*
+#------------------------------- создание
+convert -background none -fill white -font Days-Regular -pointsize 200 label:'Фабричная-мебель.рф' wm.png
+convert -size 3000x500 xc:grey30 -font Days-Regular -pointsize 200 -gravity center -draw "fill grey70 text 0,0 'Фабричная-мебель.рф'" stamp_fgnd.png
+convert -size 3000x500 xc:black -font Days-Regular -pointsize 200 -gravity center -draw "fill white text 1,1 'Фабричная-мебель.рф' text 0,0 'Фабричная-мебель.рф' fill black text -1,-1 'Фабричная-мебель.рф'" +matte stamp_mask.png
+composite -compose CopyOpacity stamp_mask.png stamp_fgnd.png mask.png
+mogrify -trim +repage mask.png
+rm stamp*.*
+#------------------------------- варианты наложения
+convert wm2.png  -fill grey50 -colorize 40  miff:- | composite -dissolve 30 -tile  -  logo.jpg wmark_dissolve_tile.jpg
+
+convert wm3.png miff:- | composite -dissolve 50 -tile  -  logo.jpg wmark_dissolve_tile.jpg
+
+convert -rotate '-4' wm.png wm0.png
+convert -rotate '35' wm.png wm0.png
+
+composite -dissolve 70% -gravity center wm3-1.png logo.jpg wmark_watermark.jpg

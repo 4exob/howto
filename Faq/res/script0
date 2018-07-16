@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# 3 461 объект, всего 1,9 ГБ
+# после запуска скрипта
+# 1 063 объекта, всего 176,1 МБ
+
+# 1200 - высота изображений
+#find -name '*.jpg' -exec mogrify -resize x1200 {} {} \;
+
+# 1600 - минимальная ширина холста изображений
+#find -name '*.jpg' -exec sh -c 'identify -format "%[fx:w<1600]\n" "$0" | grep -q 1' {} \; -print0 | xargs -0 mogrify -gravity center -extent 1600
+
+# уменьшаем качество
+#find -name '*.jpg' -exec convert -quality 75 {} {} \;
+
+# чистим метаданные
+#find -name '*.jpg' | xargs mogrify -strip
+
+# удаляем лишнее
+find -type d -name '_*' | xargs rm -dfR
+
+IFS=$'\n' _ar=(`find -name '*.jpg'`)
+for _i in "${_ar[@]}"; do
+    mogrify -resize x1200 $_i
+    if [ 1600 -gt $(identify -format "%w" "$_i") ]; then
+        mogrify -gravity center -extent 1600 $_i
+    fi
+    mogrify -quality 75 $_i
+    mogrify -strip $_i
+done

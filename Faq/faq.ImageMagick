@@ -1,0 +1,144 @@
+
+$ yaourt -S imagemagick
+
+-----------------exif обновляем
+$ find -name '*.jpg' | xargs mogrify -strip
+
+-----------------Обрезаем изображение
+$ find -name '*.jpg' -exec convert -crop 1280x960+27+20 {} {} \;
+
+$ find -name '*.jpg' -exec convert -crop 1280x960+27+20 +repage {} {} \;
+
+convert img.png -crop 655x383+79+49 +repage out.png
+
+
+-----------------обрезать все изображения до 250x100 отцентровав по центру
+$ find -name '*.jpg' -exec convert -resize '250x100^' -gravity center -crop 250x100+0+0 {} {} \;
+
+-----------------обрезать все изображения на 50% пропорционально отцентровав по центру
+$ find -name '*.jpg' -exec convert -gravity center -crop 50%\! {} {} \;
+
+-----------------обрезать все изображения на 5% погоризонтали 10% по вертикали отцентровав по центру
+$ find -name '*.jpg' -exec convert -gravity center -crop 95x90%\! {} {} \;
+
+
+-----------------увеличиваем холст по горизонтали и вертикали
+$ find -name '*.jpg' -exec convert -gravity center -extent 90x110%\! {} {} \;
+$ find -name '*.jpg' -exec convert -gravity center -extent 105x90%\! {} {} \;
+
+
+-----------------Задаем качество выходного изображения
+$ find -name '*.jpg' -exec convert -quality 95 {} {} \;
+
+-----------------Отражаем по горизонтали
+$ find -name '*.jpg' -exec convert -flop {} {} \;
+
+
+-----------------Конвертируем png в jpg, удаляем png
+$ find -iname '*.png' -exec mogrify -format jpg -quality 100 {} \;
+$ find -type f -name '*.png' -delete
+
+$ find -type d -name '_*' | xargs rm -dfR
+
+-----------------Изменяем размер изображения
+$ find -name '*.jpg' -exec convert -resize 120% {} {} \;
+
+-----------------изменить размер по вертикали с сохранением пропорций по горизонтали
+$ find -name '*.jpg' -exec mogrify -resize x1000 {} {} \;
+
+-----------------изменить размер по вертикали с сохранением пропорций картинок меньше 857
+$ find -name '*.jpg' -exec mogrify -resize 'x857<' {} {} \;
+
+-----------------2х2=4
+$ montage *.jpg -tile 2x2 -geometry 300x200\!+0+0 out.jpg
+
+$ montage *.jpg -tile 1 -geometry \!+0 flora.jpg /*вертикально
+$ montage *.jpg -tile 1 -geometry \+0+3+0+0 10.jpg
+
+$ montage *.jpg -tile 2 -geometry \!+0 flora.jpg /*горизонтально
+
+-----------------переименовать
+$ n=0; for i in `find ~/Загрузки/import -type f`; do let "n = $n + 1"; mv "$i" "`dirname "$i"`/test_$n.jpg";done
+
+-----------------WaterMark
+$ find -name '*.jpg' -exec mogrify -resize x1000 {} {} \;
+
+$ find -name '*.jpg' -exec convert -fill "#ffffffb0" -box '#f0404080' -font Sony-Sketch-EF -gravity South -pointsize 50 -annotate +0+10 ' stock-price.ru ' {} {} \;
+
+или c файлом wm.png
+$ convert -background '#f04040' -fill white -font Sony-Sketch-EF -pointsize 50 label:' stock-price.ru ' wm.png /*logo.jpg*/
+$ find -name '*.jpg' -exec composite -dissolve 50% -gravity South ~/wm.png {} {} \;
+
+-----------------Логотип для Магазина
+$ convert -background '#f13340' -fill white -font Impact -pointsize 75 label:' stock-price.ru ' wm.jpg
+$ convert -rotate '-4' wm.jpg wm.png
+
+-----------------Картинки для меню
+$ convert -background '#f13340' -fill white -font Impact -pointsize 103 label:' ЛУЧШИЕ ЦЕНЫ ТУТ ! ' thumb11.jpg
+
+-----------------
+$ montage -background none *.png -tile 5x -geometry 100%x100%+10+100 rez.png
+
+
+####################################################
+$ convert -background '#00000000' -fill '#f13340' -font Impact -pointsize 2900 label:' stock-price ru ' wm1.png
+$ convert -rotate '-4' wm1.png wm_new.png
+
+$ find -name '*.jpg' -exec composite -dissolve 50% -gravity NorthWest ~/wm.png {} {} \;
+
+
+-----------------изминение размеров если картинка больше
+convert src.gif -resize "400x400>" dst.gif
+
+-----------------отображает информацию о размере файла
+$ find -name '*.jpg' -exec identify '{}' -format "%G" \;
+
+-----------------найти фото больше определенного размера в мб и пережать?
+$ find -iname '*.jpg' -size +1M -exec mogrify -geometry 50%x50% {} \;
+
+-----------------Замена белого фона прозрачным
+$ find -iname '*.jpg' -exec mogrify -fill none -fuzz 1% -draw 'matte 0,0 floodfill' -flop -draw 'matte 0,0 floodfill' -flop -format png {} \;
+или
+$ find -iname '*.jpg' -exec mogrify -format png -quality 100 {} \;
+$ find -iname '*.png' -exec convert {} -fuzz 20% -fill white -draw 'color 5,5 floodfill' -quality 100 {} \;
+$ find -iname '*.png' -exec convert {} -transparent white {} \;
+$ find -iname '*.png' -exec convert {} -define convolve:scale='100!,100%' -morphology Convolve 'Log:0x2' {} \;
+-----------------удаляем все лишнее
+$ find -name "*.png" -exec convert -trim {} {} \;
+-----------------поменять черное на белое
+$ convert wm.png -colorspace HSI -channel B -level 100,0% +channel -colorspace sRGB wm.png
+
+
+#------------------------------- создание wm, соединяем с помощью GIMP
+convert -background none -fill white -font Days-Regular -pointsize 200 label:'Фабричная-мебель.рф' wm.png
+
+convert -size 3000x500 xc:grey30 -font Days-Regular -pointsize 200 -gravity center -draw "fill grey70 text 0,0 'Фабричная-мебель.рф'" stamp_fgnd.png
+convert -size 3000x500 xc:black -font Days-Regular -pointsize 200 -gravity center -draw "fill white text 1,1 'Фабричная-мебель.рф' text 0,0 'Фабричная-мебель.рф' fill black text -1,-1 'Фабричная-мебель.рф'" +matte stamp_mask.png
+composite -compose CopyOpacity stamp_mask.png stamp_fgnd.png mask.png
+mogrify -trim +repage mask.png
+
+rm stamp*.*
+
+#------------------------------- варианты наложения на картинку
+convert wm2.png -fill grey50 -colorize 40 miff:- | composite -dissolve 30 -tile - logo.jpg wmark_dissolve_tile.jpg
+
+convert wm3.png miff:- | composite -dissolve 50 -tile - logo.jpg wmark_dissolve_tile.jpg
+
+convert -rotate '-4' wm.png wm0.png
+convert -rotate '35' wm.png wm3.png
+
+composite -dissolve 70% -gravity Center wm3.png logo.jpg wmark_watermark.jpg
+
+
+$ find -name '*.jpg' -exec composite -dissolve 50% -gravity Center ~/wm3.png {} {} \;
+
+
+####################################################markerSTAR
+convert -background none -fill white -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage -crop 65x91+7+0 shadow1.png
+convert -background none -fill white -font MyriadPro-BlackSemiCn -pointsize 112 label:9 -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage -crop 61x91+4+0 shadow2.png
+convert -background none -fill white -font PizzaDude-Stars -pointsize 30 label:t -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage -crop 23x36+7+0 shadow3.png
+convert -background none -fill white -font MyriadPro-BlackSemiCn -pointsize 93 label:800 -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage -crop 153x80+7+0 shadow4.png
+convert -background none -gravity South shadow*.* +append shadow.png
+convert -background none -fill white -font MyriadPro-Bold -pointsize 42 label:'Спальня БАСЯ-1' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage shadow0.png
+convert -background none -gravity East shadow0.png shadow.png -append k166-10.png
+rm shadow*.*

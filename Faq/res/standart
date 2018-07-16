@@ -1,0 +1,55 @@
+#!/bin/bash
+rm *.png
+#-------------------------------
+convert -background none -fill '#363838' -font BebasNeueBold -pointsize 80 label:'Шкаф 3-ств. с ящиками' shadow1.png
+convert -background none -fill '#363838' -font AA-BebasNeue -pointsize 70 label:'1280 x 2100 x 560' shadow2.png
+convert -background none -gravity West shadow*.* -append 001.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:7 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:600 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 002.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#363838' -font BebasNeueBold -pointsize 80 label:'Шкаф 2-ств. с перегородкой' shadow1.png
+convert -background none -fill '#363838' -font AA-BebasNeue -pointsize 70 label:'800 x 2100 x 560' shadow2.png
+convert -background none -gravity West shadow*.* -append 003.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:4 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:900 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 004.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#363838' -font BebasNeueBold -pointsize 80 label:'Кровать Стандарт 1.6м' shadow1.png
+convert -background none -fill '#363838' -font AA-BebasNeue -pointsize 70 label:'1750 x 750 x 2032' shadow2.png
+convert -background none -gravity West shadow*.* -append 005.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:3 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:500 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 006.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#363838' -font BebasNeueBold -pointsize 80 label:'Кровать Стандарт 0.9м' shadow1.png
+convert -background none -fill '#363838' -font AA-BebasNeue -pointsize 70 label:'1050 x 750 x 2032' shadow2.png
+convert -background none -gravity West shadow*.* -append 007.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:2 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:700 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 008.png
+rm label*.*
+#-------------------------------
+convert -background none -fill '#363838' -font BebasNeueBold -pointsize 80 label:'Комод Стандарт-5' shadow1.png
+convert -background none -fill '#363838' -font AA-BebasNeue -pointsize 70 label:'800 x 820 x 440' shadow2.png
+convert -background none -gravity West shadow*.* -append 009.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:3 -crop 65x130+0+0 label1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 label3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:400 -crop 165x180+0+0 label4.png
+convert -background none -gravity South label*.* +append 010.png
+rm label*.*
+#-------------------------------
+
+

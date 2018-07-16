@@ -1,0 +1,320 @@
+#!/bin/bash
+rm *.png
+#
+convert -background none -fill '#363838' -font BebasNeueBold -pointsize 300 label:'ДЕЛИ' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage deli.png
+convert -background none -fill white -font BebasNeueBold -pointsize 300 label:'ДЕЛИ' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage deli2.png
+convert -background none -fill white -font BebasNeueBold -pointsize 300 label:'ПРАГА' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage praga.png
+convert -background none -fill white -font BebasNeueBold -pointsize 300 label:'СИТИ' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage siti.png
+convert -background none -fill white -font BebasNeueBold -pointsize 300 label:'ГРАЦИЯ' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage gracia.png
+convert -background none -fill white -font BebasNeueBold -pointsize 300 label:'ВАЛЕНСИЯ' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage valencia.png
+#-------------------------------
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:6 -crop 65x130+0+0 shadow2.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 shadow3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 90 label:600 -crop 165x190+0+0 shadow4.png
+convert -background none -gravity South shadow*.* +append 6600s.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:7 -crop 65x130+0+0 shadow2.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 shadow3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 90 label:800 -crop 165x190+0+0 shadow4.png
+convert -background none -gravity South shadow*.* +append 7800s.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:8 -crop 65x130+0+0 shadow2.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 shadow3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 90 label:000 -crop 165x190+0+0 shadow4.png
+convert -background none -gravity South shadow*.* +append 8000s.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:8 -crop 65x130+0+0 shadow2.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 shadow3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 90 label:600 -crop 165x190+0+0 shadow4.png
+convert -background none -gravity South shadow*.* +append 8600s.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:1 -crop 65x130+0+0 shadow2.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 shadow3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 90 label:400 -crop 165x190+0+0 shadow4.png
+convert -background none -gravity South shadow*.* +append 11400s.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 112 label:6 -crop 65x130+0+0 shadow2.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 80 label:. -crop 20x0+0+0 shadow3.png
+convert -background none -fill '#f04040' -font My-Font-Regular -pointsize 90 label:300 -crop 165x190+0+0 shadow4.png
+convert -background none -gravity South shadow*.* +append 16300s.png
+rm shadow*.*
+#-------------------------------
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:450 -crop 165x190+0+0 450.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:500 -crop 165x190+0+0 500.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:800 -crop 165x190+0+0 800.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:850 -crop 165x190+0+0 850.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:900 -crop 165x190+0+0 900.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:950 -crop 165x190+0+0 950.png
+#
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:000 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1000.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:100 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1100.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:150 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1150.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:200 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1200.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:300 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1300.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:350 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1350.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:400 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1400.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:450 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1450.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:500 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1500.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:550 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1550.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:600 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1600.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:650 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1650.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:700 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1700.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:750 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1750.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:800 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1800.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:850 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1850.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:900 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1900.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:950 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 1950.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:2 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:000 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 2000.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:2 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:100 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 2100.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:2 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:200 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 2200.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:2 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:300 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 2300.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:2 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:400 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 2400.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:2 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:500 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 2500.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:2 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:600 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 2600.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:2 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:700 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 2700.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:2 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:800 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 2800.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:2 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:900 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 2900.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:3 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:000 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 3000.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:3 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:100 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 3100.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:3 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:200 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 3200.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:3 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:300 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 3300.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:3 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:400 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 3400.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:3 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:500 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 3500.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:3 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:550 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 3550.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:3 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:600 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 3600.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:3 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:650 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 3650.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:3 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:800 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 3800.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:3 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:900 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 3900.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:4 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:100 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 4100.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:4 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:200 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 5500.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:4 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:300 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 4300.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:4 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:400 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 4400.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:4 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:800 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 4800.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:5 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:400 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 5400.png
+rm shadow*.*
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 112 label:5 -crop 65x130+0+0 shadow1.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 80 label:. -crop 20x0+0+0 shadow2.png
+convert -background none -fill '#f04040' -font MyriadPro-BlackSemiCn -pointsize 90 label:800 -crop 165x190+0+0 shadow3.png
+convert -background none -gravity South shadow*.* +append 5800.png
+rm shadow*.*
+#
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Шкаф торцевой' v1.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Шкаф 300' v2.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Витрина 300' v3.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Шкаф 400' v4.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Витрина 400' v5.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Шкаф 450' v6.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Витрина 450' v7.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Шкаф 500' v8.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Витрина 500' v9.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Газовка 500' v10.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Газовка 500 витрина' v11.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Шкаф 600' v12.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Витрина 600' v13.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Газовка 600' v14.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Газовка 600 витрина' v15.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Шкаф угловой' v16.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Шкаф 700' v17.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Витрина 700' v18.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Шкаф 800' v19.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол торцевой' n1.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 300' n2.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 400' n3.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 400 комби' n4.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Пенал 400' n5.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 450' n6.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 450 комби' n7.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 500' n8.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 500 комби' n9.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Мойка 500' n10.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 600' n11.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 600 комби' n12.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Мойка 600' n13.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 700' n14.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 700 комби' n15.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 800' n16.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол 800 комби' n17.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Мойка 800' n18.png
+convert -background none -fill gray -font My-Font-[object-Object] -pointsize 55 label:'Стол угловой' n19.png
+#

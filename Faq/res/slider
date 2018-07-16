@@ -1,0 +1,20 @@
+#!/bin/bash
+rm *.png
+#-------------------------------
+#convert -background none -fill '363838' -font BebasNeueBold -pointsize 1000 label:'оплата по факту получения' shadow10.png
+#convert -background none -fill 'f04040' -font BebasNeueBold -pointsize 1000 label:'доставка мебели' shadow11.png
+#convert -background none -fill 'f04040' -font BebasNeueBold -pointsize 950 label:'+7 (905) 010-05-06' shadow12.png
+convert -background none -fill gray -font BebasNeueBold -pointsize 600 label:'Москва, МО' shadow2.png
+convert -background none -fill gray -font BebasNeueBold -pointsize 600 label:'Рязань' shadow3.png
+convert -background none -fill gray -font BebasNeueBold -pointsize 600 label:'Тула' shadow4.png
+convert -background none -fill gray -font BebasNeueBold -pointsize 600 label:'Калуга' shadow5.png
+convert -background none -fill gray -font BebasNeueBold -pointsize 600 label:'Брянск' shadow6.png
+convert -background none -fill gray -font BebasNeueBold -pointsize 600 label:'Воронеж' shadow7.png
+convert -background none -fill gray -font BebasNeueBold -pointsize 600 label:'Нижний Новгород' shadow8.png
+convert -background none -fill gray -font BebasNeueBold -pointsize 600 label:'Муром' shadow9.png
+convert -background none -fill '363838' -font MyriadPro-Bold -pointsize 250 label:'город и область:' shadow1.png
+convert -background none -gravity West shadow*.* -append label.png
+rm shadow*.*
+#-------------------------------
+
+

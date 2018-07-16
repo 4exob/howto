@@ -1,0 +1,316 @@
+sudo systemctl start ssd.service
+    2  sudo systemctl start sshd.service
+    3  sudo nano /etc/ssh/ssh_config
+    4  sudo nano /etc/ssh/sshd_config
+    5  sudo systemctl enable sshd.service
+    6  sudo systemctl reboot
+    7  sudo systemctl --failed
+    8  sudo nano /etc/ssh/ssh_config
+    9  sudo nano /etc/ssh/sshd_config
+   10  sudo systemctl restart sshd.service
+   11  sudo nano /etc/ssh/sshd_config
+   12  sudo systemctl restart sshd.service
+   13  sudo systemctl start sshd.socket
+   14  sudo systemctl enable sshd.socket
+   15  sudo systemctl reboot
+   16  sudo nano /etc/hosts.deny
+   17  sudo nano /etc/hosts.allow
+   18  sudo nano /etc/ssh/sshd_config
+   19  sudo nano /etc/ssh/ssh_config
+   20  sudo systemctl reboot
+   21  sudo systemctl --failed
+   22  sudo journalctl /usr/bin/sshd
+   23  sudo nano /etc/ssh/sshd_config
+   24  sudo nano /etc/ssh/ssh_config
+   25  sudo nano /etc/system/systemd/sshd.socket
+   26  sudo nano /etc/systemd/system/sshd.socket
+   27  sudo nano /etc/systemd/system/sshd.socket
+   28  sudo nano /etc/system/systemd/sshd.socket
+   29  mc
+   30  yaourt -S mc
+   31  mc
+   32  sudo nano /etc/systemd/system/sshd_socket
+   33  sudo nano /etc/systemd/system/sshd_socket
+   34  sudo rm /etc/systemd/system/sshd_socket
+   35  mc
+   36  sudo nano /etc/ssh/ssh_config
+   37  sudo nano /etc/ssh/sshd_config
+   38  sudo journalctl /usr/bin/sshd
+   39  sudo systemctl reboot
+   40  yaourt -Syua
+   41  exit
+   42  sudo nano /etc/hosts
+   43  sudo nano /etc/hostname
+   44  sudo systemctl reboot
+   45  exit
+   46  mc
+   47  git clone https://github.com/4exob/www.git www
+   48  yaourt -S git
+   49  git clone https://github.com/4exob/www.git www
+   50  mc
+   51  mkdir downloads
+   52  ls
+   53  git config --global user.name "Alexandr Portnykh"
+   54  git config --global user.email kompokpro@gmail.com
+   55  nano ~/.gitconfig
+   56  git config --list
+   57  cd ~/www
+   58  git st
+   59  nano ~/.gitconfig
+   60  git st
+   61  git hist
+   62  cd
+   63  yaourt -Ss nginx
+   64  yaourt -S nginx-devel exim php php-fpm php-mcrypt perl-soap-lite php-gd sqlite php-sqlite php-apcu
+   65  yaourt -S nginx-mainline exim php php-fpm php-mcrypt perl-soap-lite php-gd sqlite php-sqlite php-apcu
+   66  yaourt -S nginx-mainline
+   67  yaourt -S nginx-devel
+   68  mc
+   69  yaourt -S nginx-devel
+   70  yaourt -S psol
+   71  yaourt -S nginx
+   72  sudo systemctl enable exim
+   73  sudo systemctl start exim
+   74  sudo nano /etc/mail/exim.conf
+   75  mc
+   76  ip a
+   77  sudo systemctl enable nginx
+   78  sudo systemctl enable php-fpm
+   79  chmod 755 ~/
+   80  chmod 755 ~/www
+   81  chmod 755 ~/www/kompok.pro
+   82  chmod 755 ~/www/kompok36.ru
+   83  chmod 755 ~/www/avant-trans.ru
+   84  chmod 755 ~/www/preferred-stock.ru
+   85  find ~/www/kompok36.ru -type f -print0 | xargs -0 chmod 664
+   86  find ~/www/kompok.pro -type f -print0 | xargs -0 chmod 664
+   87  find ~/www/avant-trans.ru -type f -print0 | xargs -0 chmod 664
+   88  find ~/www/preferred-stock.ru -type f -print0 | xargs -0 chmod 664
+   89  find ~/www/preferred-stock.ru -type d -print0 | xargs -0 chmod 775
+   90  find ~/www/avant-trans.ru -type d -print0 | xargs -0 chmod 775
+   91  find ~/www/kompok.pro -type d -print0 | xargs -0 chmod 775
+   92  find ~/www/kompok36.ru -type d -print0 | xargs -0 chmod 775
+   93  sudo chown -R archie:http ~/www/kompok36.ru
+   94  sudo chown -R archie:http ~/www/kompok.pro
+   95  sudo chown -R archie:http ~/www/avant-trans.ru
+   96  sudo chown -R archie:http ~/www/preferred-stock.ru
+   97  sudo nano /etc/php/php.ini
+   98  sudo nano /etc/php/php.ini
+   99  sudo nano /etc/php/conf.d/apcu.ini
+  100  sudo nano /etc/php/conf.d/05-opcache.ini
+  101  sudo nano /etc/nginx/nginx.conf
+  102  sudo mkdir /etc/nginx/conf.d
+  103  sudo nano /etc/nginx/conf.d/php.conf
+  104  sudo mkdir /etc/nginx/sites-available
+  105  sudo mkdir /etc/nginx/sites-enabled
+  106  sudo gedit /etc/nginx/sites-available/preferred-stock.conf
+  107  sudo nano /etc/nginx/sites-available/.conf
+  108  sudo gedit /etc/nginx/sites-available/kompok36.conf
+  109  sudo nano /etc/nginx/sites-available/kompok36.conf
+  110  sudo nano /etc/nginx/sites-available/kompok.conf
+  111  sudo nano /etc/nginx/sites-available/kompok.conf
+  112  mc
+  113  sudo nano /etc/nginx/sites-available/kompok.conf
+  114  sudo nano /etc/nginx/sites-available/kompok36.conf
+  115  sudo gedit /etc/nginx/sites-available/preferred-stock.conf
+  116  sudo nano /etc/nginx/sites-available/preferred-stock.conf
+  117  clear
+  118  sudo nano /etc/nginx/conf.d/php.conf
+  119  sudo nano /etc/nginx/nginx.conf
+  120  mc
+  121  sudo systemctl start php-fpm
+  122  sudo systemctl start nginx
+  123  mc
+  124  sudo ls /var/log/nginx
+  125  sudo mkdir /var/log/nginx/error
+  126  sudo ln -sr /etc/nginx/sites-available/kompok.conf /etc/nginx/sites-enabled/
+  127  sudo ln -sr /etc/nginx/sites-available/kompok36.conf /etc/nginx/sites-enabled/
+  128  sudo ln -sr /etc/nginx/sites-available/preferred-stock.conf /etc/nginx/sites-enabled/
+  129  mc
+  130  clear
+  131  sudo systemctl restart nginx
+  132  systemctl status nginx.service
+  133  sudo nano /etc/nginx/nginx.conf
+  134  sudo nano /etc/nginx/sites-available/kompok36.conf
+  135  sudo nano /etc/nginx/sites-available/kompok.conf
+  136  sudo systemctl restart nginx
+  137  exit
+  138  yaourt -Syua
+  139  yaourt -S htop
+  140  htop
+  141  exit
+  142  sudo systemctl restart php-fpm
+  143  mc
+  144  exit
+  145  sudo nano /etc/php/php.ini
+  146  sudo nano /etc/mail/exim.conf
+  147  exit
+  148  yaourt -S sendmail
+  149  yaourt -S mailutils
+  150  sudo systemctl restart php-fpm
+  151  sudo systemctl restart nginx
+  152  yaourt -S ssmtp
+  153  mc
+  154  exit
+  155  cd ~/www/kompok.pro
+  156  mail.php
+  157  php mail.php
+  158  cd
+  159  sudo nano /etc/php/php.ini
+  160  cd ~/www/kompok.pro
+  161  php mail.php
+  162  cd
+  163  exit
+  164  yaourt -Syua
+  165  sudo nano /etc/mail/exim.conf
+  166  tail /var/log/exim/mainlog
+  167  sudo tail /var/log/exim/mainlog
+  168  sudo systemctl status exim
+  169  usermod -G exim
+  170  sudo nano /etc/mail/exim.conf
+  171  sudo tail /var/log/exim/mainlog
+  172  yaourt -Qs openssl
+  173  yaourt -S openssl
+  174  sudo systemctl restart php-fpm
+  175  sudo systemctl restart nginx
+  176  sudo chmod 750 /var/spoll/exim/input
+  177  sudo chmod 750 /var/spoll/exim
+  178  cd ~/www/kompok.pro
+  179  php mail.php
+  180  mc
+  181  sudo chmod 750 /var/spoll/exim
+  182  sudo chmod 750 /var/spool/exim
+  183  sudo systemctl restart exim
+  184  php mail.php
+  185  sudo ls /var/spool/exim
+  186  sudo ls /var/spool/exim/input
+  187  sudo chmod 750 /var/spool/exim/input
+  188  sudo systemctl restart exim
+  189  php mail.php
+  190  sudo chmod u+x /var/spool/exim
+  191  sudo systemctl restart exim
+  192  php mail.php
+  193  sudo chmod u+x /var/spool/exim/input
+  194  sudo systemctl restart exim
+  195  php mail.php
+  196  sudo ls /var/spool/exim/input
+  197  sudo chmod 750 /var/spool/exim/input
+  198  sudo systemctl restart exim
+  199  php mail.php
+  200  sudo chown -R mail:mail /var/spool/exim
+  201  sudo systemctl restart exim
+  202  php mail.php
+  203  sudo systemctl restart php-fpm
+  204  php mail.php
+  205  id
+  206  groups
+  207  sudo chmod u+x /var/spool/exim
+  208  sudo systemctl restart php-fpm
+  209  sudo systemctl restart exim
+  210  php mail.php
+  211  sudo chmod -R 777 /var/spool/exim
+  212  sudo systemctl restart exim
+  213  php mail.php
+  214  exim -bP spool_directory
+  215  sudo ls -l /var/spool/exim
+  216  sudo ls -l /var/spool
+  217  sudo chown -R exim:exim /var/spool/exim
+  218  sudo chmod u+x /var/spool/exim
+  219  sudo ls -l /var/spool
+  220  sudo systemctl restart exim
+  221  php mail.php
+  222  sudo ls -l /var/spool
+  226  sudo ls -l /var/spool/exim
+  227  sudo chown -R mail:mail /var/spool/exim/input
+  228  sudo chown -R mail:mail /var/spool/exim/db
+  229  sudo systemctl restart exim
+  230  php mail.php
+  231  sudo systemctl stop exim
+  232  cd
+  233  yaourt -R exim
+  234  mc
+  235  sudo rm /var/spool/exim
+  236  sudo rm -rf /var/spool/exim
+  237  mc
+  238  sudo ls -l /var/spool
+  239  sudo ls -l /var
+  240  yaourt -S exim
+  241  sudo systemctl status exim
+  242  sudo systemctl start exim
+  243  sudo systemctl enable exim
+  244  sudo nano /etc/mail/exim.conf.pacsave
+  245  sudo nano /etc/mail/exim.conf.pacsave
+  246  sudo nano /etc/mail/exim.conf
+  247  sudo systemctl restart exim
+  248  cd ~/www/kompok.pro
+  249  php mail.php
+  250  php mail.php
+  251  св
+  252  cd
+  253  sudo systemctl enable exim
+  254  sudo systemctl reboot
+  255  yaourt -R mailutils
+  256  yaourt -S spamassassin
+  257  sudo systemctl enable spamassassin
+  258  sudo systemctl start spamassassin
+  259  systemctl status spamassassin.service
+  260  /usr/bin/vendor_perl/sa-update -v
+  261  sudo /usr/bin/vendor_perl/sa-update -v
+  262  sudo systemctl start spamassassin
+  263  sudo systemctl restart exim
+  264  sudo systemctl disable spamassassin
+  265  sudo systemctl stop spamassassin
+  266  yaourt -R spamassassin
+  267  sudo pacman -Rs $(pacman -Qtdq)
+  268  yaourt -Syua
+  269  sudo systemctl reboot
+  270  cd ~/www
+  271  git st
+  272  git st
+  273  rm /kompok36.ru/.subl216.tmp
+  274  git st
+  275  ls /kompok36.ru
+  276  ls
+  277  ls ~/www/kompok36.ru
+  278  rm /kompok36.ru/.subl216.tmp
+  279  git st
+  280  git add .
+  281  git commit -m "cleaned up exim mail.php twilio"
+  282  git push -u origin master
+  283  git hist
+  284  cd
+  285  yaourt -Syua
+  286  exit
+  287  yaourt -Syua
+  288  chmod 755 ~/www/stock-price.ru
+  289  find ~/www/stock-price.ru -type f -print0 | xargs -0 chmod 664
+  290  find ~/www/stock-price.ru -type d -print0 | xargs -0 chmod 775
+  291  sudo chown -R archie:http ~/www/stock-price.ru
+  292  sudo nano /etc/nginx/sites-available/stock-price.conf
+  293  sudo ln -sr /etc/nginx/sites-available/stock-price.conf /etc/nginx/sites-enabled/
+  294  sudo systemctl restart php-fpm
+  295  sudo systemctl restart nginx
+  296  exit
+  297  yaourt -Syua
+  298  sudo pacman -Syu haveged
+  299  sudo systemctl start haveged
+  300  sudo systemctl enable haveged
+  301  sudo rm -fr /etc/pacman.d/gnupg
+  302  sudo pacman-key --init
+  303  sudo pacman-key --populate archlinux
+  304  exit
+  305  yaourt -Syua
+  306  yaourt -Qs nginx
+  307  exit
+  308  yaourt -Syua
+  309  sudo systemctl reboot
+  310  yaourt -Syua
+  311  sudo systemctl reboot
+  312  exit
+  313  yaourt -Syua
+  314  sudo systemctl restart php-fpm
+  315  sudo systemctl daemon-reload
+  316  exit
+  317  yaourt -Syua
+  318  sudo pacman-db-upgrade
+
