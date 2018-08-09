@@ -24,6 +24,8 @@
 #меняем цвет на белый
 #find -iname '*.tif' -exec mogrify -fill white -opaque '#ef3f3e' {} \;
 
+#меняем оттенки нужного цвета
+#find -type f -exec mogrify -fill white -fuzz 15% -opaque '#ef3f3e' {} \;
 
 # приводим к нижнему регистру названия-расширения
 #for i in $( ls | grep [A-Z] ); do mv -i "$i" "`echo $i | tr 'A-Z' 'a-z'`"; done
