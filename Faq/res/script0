@@ -15,6 +15,28 @@
 
 # чистим метаданные
 #find -name '*.jpg' | xargs mogrify -strip
+#find -type f -name '*.*~' -delete
+
+#--------------------------------------------------------------------
+#заменяем пробелы в именах файлов и директорий
+#find . -name "* *"| sort -r | while read x; do mv "${x}" "$(dirname "${x}")/$(basename "${x}" | sed -e 's/ /_/g')"; done
+
+#меняем цвет на белый
+#find -iname '*.tif' -exec mogrify -fill white -opaque '#ef3f3e' {} \;
+
+
+# приводим к нижнему регистру названия-расширения
+#for i in $( ls | grep [A-Z] ); do mv -i "$i" "`echo $i | tr 'A-Z' 'a-z'`"; done
+# рекурсивно
+#for i in $( find -type f | grep [A-Z] ); do mv -i "$i" "`echo $i | tr 'A-Z' 'a-z'`"; done
+
+# исправляем ошибки
+#find -iname '*.png' -exec mogrify -format jpg -quality 75 {} \;
+#find -iname '*.jpeg' -exec mogrify -format jpg -quality 75 {} \;
+#find -iname '*.webp' -exec mogrify -format jpg -quality 75 {} \;
+#find -type f -name '*.png' -delete
+#find -type f -name '*.jpeg' -delete
+#find -type f -name '*.webp' -delete
 
 # удаляем лишнее
 find -type d -name '_*' | xargs rm -dfR
