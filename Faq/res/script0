@@ -33,7 +33,7 @@
 #for i in $( find -type f | grep [A-Z] ); do mv -i "$i" "`echo $i | tr 'A-Z' 'a-z'`"; done
 
 # исправляем ошибки
-#find -iname '*.png' -exec mogrify -format jpg -quality 75 {} \;
+#find -iname '*.png' -exec mogrify -background white -flatten -format jpg -quality 75 {} \;
 #find -iname '*.jpeg' -exec mogrify -format jpg -quality 75 {} \;
 #find -iname '*.webp' -exec mogrify -format jpg -quality 75 {} \;
 #find -type f -name '*.png' -delete
