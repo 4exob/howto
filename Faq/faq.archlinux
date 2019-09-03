@@ -501,7 +501,7 @@ $ sudo systemctl disable dhcpcd.service
 $ sudo systemctl enable NetworkManager-wait-online.service
 -------------------------------------------------------------------
 $ yaourt -S inxi
-$ inxi -v4 -c6 OR inxi -bDc 6
+$ inxi -v4 -c6 || inxi -bDc 6
 $ sudo du --si --max-depth=1
 -------------------------------------------------------------------
 $ sudo mount -o loop ~/Общедоступные/distr/SUF10_v.8.0.0.0.iso ~/Музыка

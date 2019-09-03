@@ -11,6 +11,8 @@ $ find -name '*.jpg' -exec convert -crop 1280x960+27+20 +repage {} {} \;
 
 convert img.png -crop 655x383+79+49 +repage out.png
 
+-----------------осветлить
+$ find -iname '*.jpg' -exec mogrify -channel B -gamma 1.25 -channel G -gamma 1.25 -channel RGB -sigmoidal-contrast 5x50% {} \;
 
 -----------------обрезать все изображения до 250x100 отцентровав по центру
 $ find -name '*.jpg' -exec convert -resize '250x100^' -gravity center -crop 250x100+0+0 {} {} \;
