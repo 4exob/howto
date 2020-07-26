@@ -37,8 +37,16 @@ $ find -name '*.jpg' -exec convert -flop {} {} \;
 
 
 -----------------Конвертируем png в jpg, удаляем png
-$ find -iname '*.png' -exec mogrify -format jpg -quality 100 {} \;
+$ find -iname '*.png' -exec mogrify -background white -flatten -format jpg -quality 75 {} \;
 $ find -type f -name '*.png' -delete
+
+$ find -iname '*.jpeg' -exec mogrify -format jpg -quality 75 {} \;
+$ find -type f -name '*.jpeg' -delete
+
+$ find -iname '*.webp' -exec mogrify -format jpg -quality 75 {} \;
+$ find -type f -name '*.webp' -delete
+
+
 
 $ find -type d -name '_*' | xargs rm -dfR
 
@@ -135,7 +143,7 @@ composite -dissolve 70% -gravity Center wm3.png logo.jpg wmark_watermark.jpg
 $ find -name '*.jpg' -exec composite -dissolve 50% -gravity Center ~/wm3.png {} {} \;
 
 
-####################################################markerSTAR
+#------------------------------- markerSTAR
 convert -background none -fill white -font MyriadPro-BlackSemiCn -pointsize 112 label:1 -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage -crop 65x91+7+0 shadow1.png
 convert -background none -fill white -font MyriadPro-BlackSemiCn -pointsize 112 label:9 -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage -crop 61x91+4+0 shadow2.png
 convert -background none -fill white -font PizzaDude-Stars -pointsize 30 label:t -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage -crop 23x36+7+0 shadow3.png
@@ -144,3 +152,16 @@ convert -background none -gravity South shadow*.* +append shadow.png
 convert -background none -fill white -font MyriadPro-Bold -pointsize 42 label:'Спальня БАСЯ-1' -trim \( +clone -background gray -shadow 100x4+0+0 \) +swap -background none -layers merge +repage shadow0.png
 convert -background none -gravity East shadow0.png shadow.png -append k166-10.png
 rm shadow*.*
+
+#------------------------------- journalctl
+journalctl -b-1
+systemd-analyze
+journalctl -b -p err..alert
+journalctl -p err..alert
+journalctl --list-boots
+journalctl -k
+journalctl -f
+journalctl --boot
+journalctl -xb | grep -Ein "bad|crash|disable|doesn't support|error|fail|filtered out|ignoring|invalid value|line takes no |no |not found|not supported|unable|unset|warning|was not"
+
+
