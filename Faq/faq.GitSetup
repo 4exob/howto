@@ -1,3 +1,11 @@
+----------------------------------------------------------------------------------------------------------------------
+$ git st
+$ git add .
+$ git commit -m "old commit"
+$ git push -u origin master
+
+
+
 $ git init
 $ git add .
 $ git commit -m "first commit"
@@ -7,6 +15,24 @@ $ git push -u origin master
 $ git st
 $ git hist
 * 9f674de 2015-06-04 | first commit (HEAD -> master, origin/master)...
+
+
+------------------ .gitconfig
+[user]
+     name = Alexandr Portnykh
+     email = rus.36@mail.ru
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+[remote "origin"]
+    url = ssh+git://github.com/4exob/howto.git
+    fetch = +refs/heads/*:refs/remotes/origin/*
+    pushurl = git@github.com:4exob/howto.git
 
 ----------------------------------------------------------------------------------------------------------------------
 $ cd ~/Projects
